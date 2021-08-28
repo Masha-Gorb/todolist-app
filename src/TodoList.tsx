@@ -85,7 +85,6 @@ const TodoList = (props: TodoListPropsType) => {
                     color={props.filter === "all" ? "secondary" : "primary"}
                     // className={props.filter === "completed" ? "active-filter" : ""}
                     onClick={onCompletedClickHandler}>Completed</Button>
-                <button>create new public repository</button>
             </div>
         </div>
     )
