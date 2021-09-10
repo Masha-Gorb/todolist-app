@@ -3,7 +3,9 @@ import {TodoList} from "./TodoList";
 
 const App =() => {
     return <div>
-        <TodoList/>
+        <TodoList title="What to learn"/>
+        <TodoList title="What to buy"/>
+        <TodoList title="What to listen"/>
     </div>
 }
 

@@ -1,10 +1,11 @@
 import React from 'react'
 
-export const TodoList = () => {
+
+export const TodoList = (props:any) => {
     return <div>
 
 
-        <h2>Here will be title of Todo List</h2>
+        <h2>{props.title}</h2>
 
         <div>
             <ul>
