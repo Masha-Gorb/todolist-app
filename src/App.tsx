@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {TodoList} from "./TodoList";
+import {Grosery} from "./Components/Grocery";
 
 export type filterType = "All" | "Active" | "Completed"
 
@@ -13,6 +14,23 @@ const App =() => {
         {id: 5, title: "Sausages", checked: false},
         {id: 6, title: "Potato", checked: true}
     ])
+
+    let [products, setProduct] = useState([
+            {id: 1, title: 'Potato', isBought: true},
+            {id: 2, title: 'Tomato', isBought: true},
+            {id: 3, title: 'Apple', isBought: false},
+            {id: 4, title: 'Orange', isBought: true},
+            {id: 6, title: 'Onion', isBought: false},
+            {id: 7, title: 'Cabbage', isBought: false},
+            {id: 8, title: 'Grape', isBought: true},
+
+        ]
+    )
+
+    const deleteProduct = (productId: number) => {
+        let actualProducts = products.filter(f => f.id!==productId)
+        setProduct(actualProducts)
+    }
 
     //делаем удаление таски
     //передаем функции аргумент - в нашем случае найтись может по Id
@@ -56,6 +74,12 @@ const App =() => {
             tasks={filtredTasks}
             deleteTask={deleteTask}
             changeFilter={changeFilter}
+        />
+
+        <Grosery
+            name={'Healthy list'}
+        product={products}
+            deleteProduct={deleteProduct}
         />
     </div>
 }
