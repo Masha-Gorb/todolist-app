@@ -3,7 +3,7 @@ import {filterType} from "./App";
 import {Button} from "./Components/Button";
 
 type tasksPropsType = {
-    id: number,
+    id: string
     title: string
     checked: boolean
 }
@@ -12,18 +12,25 @@ type propsType = {
     //title=!string — значит что тайтл может прийти а может не прийти в компоненту
     title: string
     tasks: Array<tasksPropsType>
-    deleteTask: (taskId: number) => void //void потому что в функции нет return
+    deleteTask: (taskId: string) => void //void потому что в функции нет return
     changeFilter: (filterValue: filterType) => void
+    addTask: () => void
 }
 
 export const TodoList = (props:propsType) => {
+
+    const addTaskHandler = () => {
+        props.addTask()
+    }
+
     return (
         <div>
-
-
         <h2>{props.title}</h2>
         <input/>
-        <button>+</button>
+
+        <button onClick={addTaskHandler}>+</button>
+            {/*не забывать вызывать функцию кога тут пишем*/}
+
         <div>
             <ul>
                 {props.tasks.map(m => {
