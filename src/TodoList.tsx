@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
 import {filterType} from "./App";
 import {Button} from "./Components/Button";
+import {ButtonForChangeFilter} from "./Components/ButtonForChangeFilter";
 
 type tasksPropsType = {
     id: string
@@ -34,9 +35,9 @@ export const TodoList = (props: propsType) => {
         }
     }
 
-    const generalChangeFilter = (filterValue: filterType) => {
-        props.changeFilter(filterValue)
-    }
+    // const generalChangeFilter = (filterValue: filterType) => {
+    //     props.changeFilter(filterValue)
+    // }
     // const onClickChangeFilterActive = () => {
     //     props.changeFilter('Active')
     // }
@@ -76,9 +77,16 @@ export const TodoList = (props: propsType) => {
             </div>
 
 
-            <button onClick={()=>generalChangeFilter('Active')}>Active</button>
-            <button onClick={()=>generalChangeFilter('Completed')}>Completed</button>
-            <Button changeFilter={props.changeFilter}/>
+
+            <ButtonForChangeFilter title={"All"} changeFilter={props.changeFilter}/>
+            <ButtonForChangeFilter title={"Active"} changeFilter={props.changeFilter}/>
+            <ButtonForChangeFilter title={"Completed"} changeFilter={props.changeFilter}/>
+
+            {/*<button onClick={()=>generalChangeFilter('Active')}>Active</button>*/}
+            {/*<button onClick={()=>generalChangeFilter('Completed')}>Completed</button>*/}
+            {/*<Button changeFilter={props.changeFilter}/>*/}
+
+
             {/*у компоненты не может быть onClick*/}
             {/*<button onClick={() => props.changeFilter('All')}>All</button>*/}
 
