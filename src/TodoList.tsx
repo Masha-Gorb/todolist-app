@@ -62,6 +62,9 @@ export const TodoList = (props: propsType) => {
         props.changeFilter(filterValue)
     }
 
+    const deleteTaskHandler = (tId: string) => {
+        props.deleteTask(tId)
+    }
     return (
         <div>
             <h2>{props.title}</h2>
@@ -74,12 +77,9 @@ export const TodoList = (props: propsType) => {
                 <ul>
                     {props.tasks.map(m => {
 
-                        const deleteTaskHandler = () => {
-                            props.deleteTask(m.id)
-                        }
                             return (
                                 <li key={m.id}>
-                                    <ButtonUniversal title={"x"} callBack={deleteTaskHandler}/>
+                                    <ButtonUniversal title={"x"} callBack={() => deleteTaskHandler(m.id)}/>
                                     {/*<button onClick={ () => onChangeDeleteTaskHandler(m.id)}>x</button>*/}
                                     <input type="checkbox" checked={m.checked}/>
                                     <span>{m.title}</span>
