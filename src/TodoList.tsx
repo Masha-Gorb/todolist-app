@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
 import {filterType} from "./App";
 import {Button} from "./Components/Button";
-import {ButtonForChangeFilter} from "./Components/ButtonForChangeFilter";
+import {ButtonUniversal} from "./Components/ButtonUniversal";
 
 type tasksPropsType = {
     id: string
@@ -61,12 +61,13 @@ export const TodoList = (props: propsType) => {
                 <ul>
                     {props.tasks.map(m => {
 
-                        // const onChangeDeleteTaskHandler = () => {
-                        //     props.deleteTask(m.id)
-                        // }
+                        const deleteTaskHandler = () => {
+                            props.deleteTask(m.id)
+                        }
                             return (
                                 <li key={m.id}>
-                                    <button onClick={ () => onChangeDeleteTaskHandler(m.id)}>x</button>
+                                    <ButtonUniversal title={"x"} callBack={deleteTaskHandler}/>
+                                    {/*<button onClick={ () => onChangeDeleteTaskHandler(m.id)}>x</button>*/}
                                     <input type="checkbox" checked={m.checked}/>
                                     <span>{m.title}</span>
                                 </li>
@@ -78,9 +79,10 @@ export const TodoList = (props: propsType) => {
 
 
 
-            <ButtonForChangeFilter title={"All"} changeFilter={props.changeFilter}/>
-            <ButtonForChangeFilter title={"Active"} changeFilter={props.changeFilter}/>
-            <ButtonForChangeFilter title={"Completed"} changeFilter={props.changeFilter}/>
+
+            {/*<ButtonForChangeFilter title={"All"} changeFilter={props.changeFilter}/>*/}
+            {/*<ButtonForChangeFilter title={"Active"} changeFilter={props.changeFilter}/>*/}
+            {/*<ButtonForChangeFilter title={"Completed"} changeFilter={props.changeFilter}/>*/}
 
             {/*<button onClick={()=>generalChangeFilter('Active')}>Active</button>*/}
             {/*<button onClick={()=>generalChangeFilter('Completed')}>Completed</button>*/}
