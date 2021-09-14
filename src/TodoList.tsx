@@ -45,8 +45,21 @@ export const TodoList = (props: propsType) => {
     //     props.changeFilter('Completed')
     // }
 
-    const onChangeDeleteTaskHandler = (id: string) => {
-        props.deleteTask(id)
+
+    // const changeAllFilterHandler = () => {
+    //     props.changeFilter('All')
+    // }
+    //
+    // const changeActiveFilterHandler = () => {
+    //     props.changeFilter('Active')
+    // }
+    //
+    // const changeCompletedFilterHandler = () => {
+    //     props.changeFilter('Completed')
+    // }
+
+    const changeFilterOptimusHandler = (filterValue: filterType ) => {
+        props.changeFilter(filterValue)
     }
 
     return (
@@ -78,6 +91,12 @@ export const TodoList = (props: propsType) => {
             </div>
 
 
+            <ButtonUniversal title={'All'} callBack={() => changeFilterOptimusHandler('All')} />
+            <ButtonUniversal title={'Active'} callBack={() => changeFilterOptimusHandler('Active')} />
+            <ButtonUniversal title={'Completed'} callBack={() => changeFilterOptimusHandler('Completed')} />
+            {/*<ButtonUniversal title={'All'} callBack={changeAllFilterHandler} />*/}
+            {/*<ButtonUniversal title={'Active'} callBack={changeActiveFilterHandler} />*/}
+            {/*<ButtonUniversal title={'Completed'} callBack={changeCompletedFilterHandler} />*/}
 
 
             {/*<ButtonForChangeFilter title={"All"} changeFilter={props.changeFilter}/>*/}
