@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {TodoList} from "./TodoList";
 import {Grosery} from "./Components/Grocery";
 import {v1} from "uuid";
+import {NewInput} from "./Components/NewInput";
 
 export type filterType = "All" | "Active" | "Completed"
 export type filterForProductsType = 'All' | 'Vegetables' | 'Fruits'
@@ -105,6 +106,18 @@ const App =() => {
         setTasks([newTask, ...tasks])
     }
 
+
+    let [lines, setLines] = useState([
+        {id: v1(), title: 'Line 1'},
+        {id: v1(), title: 'Line 2'},
+        {id: v1(), title: 'Line 3'}
+    ])
+
+    const addNewLine = (newLineTitle: string) => {
+        let newLine = {id: v1(), title: newLineTitle}
+        setLines([newLine, ...lines])
+    }
+
     return <div>
         <TodoList
             title="What to buy"
@@ -112,6 +125,16 @@ const App =() => {
             deleteTask={deleteTask}
             changeFilter={changeFilter}
             addTask={addTask}
+        />
+
+        {/*<NewInput*/}
+        {/*addNewLine={addNewLine}*/}
+        {/*lines={lines}*/}
+        {/*/>*/}
+
+        <NewInput
+        lines={lines}
+        addNewLine={addNewLine}
         />
 
         {/*<Grosery*/}

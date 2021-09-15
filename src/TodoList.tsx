@@ -85,7 +85,7 @@ export const TodoList = (props: propsType) => {
                                     <span>{m.title}</span>
                                 </li>
                             )
-                        }
+                        } 
                     )}
                 </ul>
             </div>
