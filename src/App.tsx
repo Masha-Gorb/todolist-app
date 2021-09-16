@@ -106,12 +106,13 @@ const App =() => {
         setTasks([newTask, ...tasks])
     }
 
-    const changeChekBox = (myEvent: boolean, id: string) => {
-        let currentTask=tasks.find(ft => ft.id===id)
-        if(currentTask) {
-            currentTask.checked=myEvent
-            setTasks([...tasks])
-        }
+    const changeChekBox = (myEvent: boolean, newId : string) => {
+        // let currentTask=tasks.find(ft => ft.id===id)
+        // if(currentTask) {
+        //     currentTask.checked=myEvent
+        //     setTasks([...tasks])
+
+        setTasks(tasks.map(mID => mID.id===newId ? {...mID, checked: myEvent} : mID))
     }
 
 

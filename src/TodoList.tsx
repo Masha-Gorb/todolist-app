@@ -16,7 +16,7 @@ type propsType = {
     deleteTask: (taskId: string) => void //void потому что в функции нет return
     changeFilter: (filterValue: filterType) => void
     addTask: (newTaskTitle: string) => void
-    changeChekBox: (myEvent: boolean, id: string) => void
+    changeChekBox: (myEvent: boolean, newId: string) => void
 }
 
 export const TodoList = (props: propsType) => {
