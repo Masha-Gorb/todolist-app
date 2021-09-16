@@ -106,17 +106,26 @@ const App =() => {
         setTasks([newTask, ...tasks])
     }
 
-
-    let [lines, setLines] = useState([
-        {id: v1(), title: 'Line 1'},
-        {id: v1(), title: 'Line 2'},
-        {id: v1(), title: 'Line 3'}
-    ])
-
-    const addNewLine = (newLineTitle: string) => {
-        let newLine = {id: v1(), title: newLineTitle}
-        setLines([newLine, ...lines])
+    const changeChekBox = (myEvent: boolean, id: string) => {
+        let currentTask=tasks.find(ft => ft.id===id)
+        if(currentTask) {
+            currentTask.checked=myEvent
+            setTasks([...tasks])
+        }
     }
+
+
+    //! ! ! ТРЕНИРОВКА ИНПУТА ! ! !
+    // let [lines, setLines] = useState([
+    //     {id: v1(), title: 'Line 1'},
+    //     {id: v1(), title: 'Line 2'},
+    //     {id: v1(), title: 'Line 3'}
+    // ])
+    //
+    // const addNewLine = (newLineTitle: string) => {
+    //     let newLine = {id: v1(), title: newLineTitle}
+    //     setLines([newLine, ...lines])
+    // }
 
     return <div>
         <TodoList
@@ -125,6 +134,7 @@ const App =() => {
             deleteTask={deleteTask}
             changeFilter={changeFilter}
             addTask={addTask}
+            changeChekBox={changeChekBox}
         />
 
         {/*<NewInput*/}
@@ -132,10 +142,10 @@ const App =() => {
         {/*lines={lines}*/}
         {/*/>*/}
 
-        <NewInput
-        lines={lines}
-        addNewLine={addNewLine}
-        />
+        {/*<NewInput*/}
+        {/*lines={lines}*/}
+        {/*addNewLine={addNewLine}*/}
+        {/*/>*/}
 
         {/*<Grosery*/}
         {/*    name={'Healthy list'}*/}
