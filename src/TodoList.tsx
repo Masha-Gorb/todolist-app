@@ -66,6 +66,11 @@ export const TodoList = (props: propsType) => {
     const deleteTaskHandler = (tId: string) => {
         props.deleteTask(tId)
     }
+
+    const onChangeCheckBoxHandler = (event: ChangeEvent<HTMLInputElement>, newId: string) => {
+        // console.log(event.currentTarget.checked)
+        props.changeChekBox(event.currentTarget.checked, newId)
+    }
     return (
         <div>
             <h2>{props.title}</h2>
@@ -78,16 +83,11 @@ export const TodoList = (props: propsType) => {
                 <ul>
                     {props.tasks.map(m => {
 
-                        const onChangeCheckBoxHandler = (event: ChangeEvent<HTMLInputElement>) => {
-                            // console.log(event.currentTarget.checked)
-                            props.changeChekBox(event.currentTarget.checked, m.id)
-                        }
-
                             return (
                                 <li key={m.id}>
                                     <ButtonUniversal title={"x"} callBack={() => deleteTaskHandler(m.id)}/>
                                     {/*<button onClick={ () => onChangeDeleteTaskHandler(m.id)}>x</button>*/}
-                                    <input type="checkbox" onChange={onChangeCheckBoxHandler} checked={m.checked}/>
+                                    <input type="checkbox" onChange={(event) => onChangeCheckBoxHandler(event, m.id)} checked={m.checked}/>
                                     <span>{m.title}</span>
                                 </li>
                             )
