@@ -102,8 +102,11 @@ const App =() => {
 
 
     const addTask = (newTaskTitle: string) => {
-        let newTask = {id: v1(), title: newTaskTitle, checked: true}
-        setTasks([newTask, ...tasks])
+        if(newTaskTitle.trim()!==" ") {
+            let newTask = {id: v1(), title: newTaskTitle.trim(), checked: true}
+            setTasks([newTask, ...tasks])
+        }
+
     }
 
     const changeChekBox = (myEvent: boolean, newId : string) => {
