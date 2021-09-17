@@ -3,6 +3,8 @@ import {TodoList} from "./TodoList";
 import {Grosery} from "./Components/Grocery";
 import {v1} from "uuid";
 import {NewInput} from "./Components/NewInput";
+import styles from './App.module.css'
+
 
 export type filterType = "All" | "Active" | "Completed"
 export type filterForProductsType = 'All' | 'Vegetables' | 'Fruits'
@@ -102,7 +104,7 @@ const App =() => {
 
 
     const addTask = (newTaskTitle: string) => {
-        if(newTaskTitle.trim()!==" ") {
+        if(newTaskTitle.trim()!=="") {
             let newTask = {id: v1(), title: newTaskTitle.trim(), checked: true}
             setTasks([newTask, ...tasks])
         }

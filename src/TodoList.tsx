@@ -2,6 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
 import {filterType} from "./App";
 import {Button} from "./Components/Button";
 import {ButtonUniversal} from "./Components/ButtonUniversal";
+import styles from './App.module.css'
 
 type tasksPropsType = {
     id: string
@@ -22,10 +23,15 @@ type propsType = {
 export const TodoList = (props: propsType) => {
 
     let [newTaskTitle, setNewTaskTitle] = useState('')
+    let [error, setError] = useState(true)
+
     const addTaskHandler = () => {
         props.addTask(newTaskTitle)
+        setNewTaskTitle('')
+        setError(false)
     }
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setError(false)
         setNewTaskTitle(event.currentTarget.value)
     }
 
@@ -33,8 +39,11 @@ export const TodoList = (props: propsType) => {
         if (event.key === 'Enter') {
             props.addTask(newTaskTitle)
             setNewTaskTitle('')
+            setError(false)
         }
     }
+
+
 
     // const generalChangeFilter = (filterValue: filterType) => {
     //     props.changeFilter(filterValue)
@@ -77,6 +86,7 @@ export const TodoList = (props: propsType) => {
             <input value={newTaskTitle} onChange={onChangeHandler} onKeyPress={onKeyPressHandler}/>
 
             <button onClick={addTaskHandler}>+</button>
+            {error && <div className={styles.errorMessage}>Title is required</div>}
             {/*не забывать вызывать функцию кога тут пишем*/}
 
             <div>
