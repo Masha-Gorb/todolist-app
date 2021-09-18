@@ -141,6 +141,7 @@ const App =() => {
             changeFilter={changeFilter}
             addTask={addTask}
             changeChekBox={changeChekBox}
+            filter={filter}
         />
 
         {/*<NewInput*/}

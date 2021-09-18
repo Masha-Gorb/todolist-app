@@ -1,5 +1,6 @@
 import React from 'react'
 import {filterType} from "../App";
+import styles from '../App.module.css'
 
 
 //! ! ! НЕЗАВИСИМЫЕ ПРАВИЛЬНЫЕ КНОПКИ ! ! !
@@ -18,6 +19,7 @@ import {filterType} from "../App";
 type PropsType = {
     title: string
     callBack: () => void
+    filter: filterType
 }
 
 export const ButtonUniversal = (props: PropsType) => {
@@ -27,7 +29,7 @@ export const ButtonUniversal = (props: PropsType) => {
     }
     return (
         <div>
-            <button onClick={callBackHandler}>{props.title}</button>
+            <button className={styles.activeFilter} onClick={callBackHandler}>{props.title}</button>
         </div>
     )
 }

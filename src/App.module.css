@@ -5,3 +5,7 @@
 .errorMessage {
     color: red;
 }
+
+.activeFilter:focus {
+    background-color: aquamarine;
+}
