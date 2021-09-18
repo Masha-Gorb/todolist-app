@@ -14,14 +14,21 @@ type propsType = {
     //title=!string — значит что тайтл может прийти а может не прийти в компоненту
     title: string
     tasks: Array<tasksPropsType>
-    deleteTask: (taskId: string) => void //void потому что в функции нет return
+    // deleteTask: (taskId: string) => void //void потому что в функции нет return
     changeFilter: (filterValue: filterType) => void
     addTask: (newTaskTitle: string) => void
     changeChekBox: (myEvent: boolean, newId: string) => void
     filter: filterType
+    setTasks: (tasks: Array<tasksPropsType>) => void
 }
 
 export const TodoList = (props: propsType) => {
+
+    const deleteTask = (taskId: string) => {
+            console.log(taskId)
+           let deleteTask1 = props.tasks.filter( f => f.id!==taskId )
+            props.setTasks(deleteTask1)
+        }
 
     let [newTaskTitle, setNewTaskTitle] = useState('')
     let [error, setError] = useState(true)
@@ -74,7 +81,7 @@ export const TodoList = (props: propsType) => {
     }
 
     const deleteTaskHandler = (tId: string) => {
-        props.deleteTask(tId)
+        deleteTask(tId)
     }
 
     const onChangeCheckBoxHandler = (event: ChangeEvent<HTMLInputElement>, newId: string) => {

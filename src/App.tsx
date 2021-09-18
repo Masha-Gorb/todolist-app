@@ -59,12 +59,12 @@ const App =() => {
     //запустить перерисовку можем только с помощью сетТаскс через юзСтейт
 
     //про фильтр: делетеТаск1 это результирующий массив который удовлетворяет условию
-    const deleteTask = (taskId: string) => {
-        console.log(taskId)
-       let deleteTask1 = tasks.filter( f => f.id!==taskId )
-
-        setTasks(deleteTask1)
-    }
+    // const deleteTask = (taskId: string) => {
+    //     console.log(taskId)
+    //    let deleteTask1 = tasks.filter( f => f.id!==taskId )
+    //
+    //     setTasks(deleteTask1)
+    // }
 
 
 
@@ -137,11 +137,12 @@ const App =() => {
         <TodoList
             title="What to buy"
             tasks={filtredTasks}
-            deleteTask={deleteTask}
+            // deleteTask={deleteTask}
             changeFilter={changeFilter}
             addTask={addTask}
             changeChekBox={changeChekBox}
             filter={filter}
+            setTasks={setTasks}
         />
 
         {/*<NewInput*/}
