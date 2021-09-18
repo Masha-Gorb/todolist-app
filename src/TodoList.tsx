@@ -101,7 +101,7 @@ export const TodoList = (props: propsType) => {
                                     <ButtonUniversal filter={props.filter} title={"x"} callBack={() => deleteTaskHandler(m.id)}/>
                                     {/*<button onClick={ () => onChangeDeleteTaskHandler(m.id)}>x</button>*/}
                                     <input type="checkbox" onChange={(event) => onChangeCheckBoxHandler(event, m.id)} checked={m.checked}/>
-                                    <span>{m.title}</span>
+                                    <span className={m.checked ? styles.isDone : ''}>{m.title}</span>
                                 </li>
                             )
                         }
