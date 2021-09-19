@@ -14,12 +14,12 @@ type propsType = {
     todolistId: string
     title: string
     tasks: Array<tasksPropsType>
-    deleteTask: (taskId: string) => void //void потому что в функции нет return
+    deleteTask: (todolistId: string, taskId: string) => void //void потому что в функции нет return
     changeFilter: (filterValue: filterType, todolistId: string) => void
-    addTask: (newTaskTitle: string) => void
-    changeChekBox: (myEvent: boolean, newId: string) => void
+    addTask: (todolistId: string, newTaskTitle: string) => void
+    changeChekBox: (todolistId: string, myEvent: boolean, newId: string) => void
     filter: filterType
-    setTasks: (tasks: Array<tasksPropsType>) => void
+    // setTasks: (tasks: Array<tasksPropsType>) => void
 }
 
 export const TodoList = (props: propsType) => {
@@ -28,7 +28,7 @@ export const TodoList = (props: propsType) => {
     let [error, setError] = useState(true)
 
     const addTaskHandler = () => {
-        props.addTask(newTaskTitle)
+        props.addTask(props.todolistId, newTaskTitle)
         setNewTaskTitle('')
         setError(false)
     }
@@ -39,7 +39,7 @@ export const TodoList = (props: propsType) => {
 
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            props.addTask(newTaskTitle)
+            props.addTask(props.todolistId,newTaskTitle)
             setNewTaskTitle('')
             setError(false)
         }
@@ -67,16 +67,16 @@ export const TodoList = (props: propsType) => {
     // }
 
     const changeFilterOptimusHandler = (filterValue: filterType,  todolistId: string) => {
-        props.changeFilter(filterValue, props.todolistId)
+        props.changeFilter(filterValue, todolistId)
     }
 
     const deleteTaskHandler = (tId: string) => {
-        props.deleteTask(tId)
+        props.deleteTask(props.todolistId, tId)
     }
 
     const onChangeCheckBoxHandler = (event: ChangeEvent<HTMLInputElement>, newId: string) => {
         // console.log(event.currentTarget.checked)
-        props.changeChekBox(event.currentTarget.checked, newId)
+        props.changeChekBox(props.todolistId, event.currentTarget.checked, newId)
     }
     return (
         <div>
