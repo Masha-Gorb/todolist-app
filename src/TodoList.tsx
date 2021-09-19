@@ -1,6 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
 import {filterType} from "./App";
-import {Button} from "./Components/Button";
 import {ButtonUniversal} from "./Components/ButtonUniversal";
 import styles from './App.module.css'
 
@@ -12,6 +11,7 @@ type tasksPropsType = {
 
 type propsType = {
     //title=!string — значит что тайтл может прийти а может не прийти в компоненту
+    todolistId: string
     title: string
     tasks: Array<tasksPropsType>
     deleteTask: (taskId: string) => void //void потому что в функции нет return

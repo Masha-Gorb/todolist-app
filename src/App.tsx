@@ -1,15 +1,22 @@
 import React, {useState} from 'react'
 import {TodoList} from "./TodoList";
-import {Grosery} from "./Components/Grocery";
 import {v1} from "uuid";
-import {NewInput} from "./Components/NewInput";
-import styles from './App.module.css'
+
 
 
 export type filterType = "All" | "Active" | "Completed"
-export type filterForProductsType = 'All' | 'Vegetables' | 'Fruits'
+export type TodolistsType = {
+    id: string
+    title: string
+    filter: filterType
+}
 
 const App =() => {
+
+    let [todolists, setTodolists] = useState<Array<TodolistsType>>( [
+        {id: v1(), title: 'What to learn', filter: 'All'},
+        {id: v1(), title: 'What to buy', filter: 'Active'}
+    ])
 
     let [tasks, setTasks] = useState([
         {id: v1(), title: "Bread", checked: true},
@@ -51,13 +58,13 @@ const App =() => {
         setFilter(filterValue)
     }
 
-    let filtredTasks = tasks
-    if (filter === "Active") {
-        filtredTasks = tasks.filter(f =>!f.checked)
-    }
-    if (filter === "Completed") {
-        filtredTasks = tasks.filter(f =>f.checked)
-    }
+    // let filtredTasks = tasks
+    // if (filter === "Active") {
+    //     filtredTasks = tasks.filter(f =>!f.checked)
+    // }
+    // if (filter === "Completed") {
+    //     filtredTasks = tasks.filter(f =>f.checked)
+    // }
 
     //!! !!! ДОБАВЛЕНИЕ ТАСКИ !! !!
     //создали функцию (с каким угодно функционалом) и передали ее в коллбек
@@ -68,7 +75,6 @@ const App =() => {
     //у инпута создаем онЧендж - учим инпут ловить вносимое значение
     //онЧендж выносим в онЧенджХандлер - в него приходит ивент, который надо протипизировать(реакт сам подскажет)
     //тестим - заставляем в консоли показать ивент.кюрентТарджет.value
-
 
     const addTask = (newTaskTitle: string) => {
         if(newTaskTitle.trim()!=="") {
@@ -92,16 +98,33 @@ const App =() => {
     }
 
     return <div>
-        <TodoList
-            title="What to buy"
-            tasks={filtredTasks}
-            deleteTask={deleteTask}
-            changeFilter={changeFilter}
-            addTask={addTask}
-            changeChekBox={changeChekBox}
-            filter={filter}
-            setTasks={setTasks}
-        />
+        {todolists.map( (m) => {
+
+            let filtredTasks = tasks
+            if (m.filter === "Active") {
+                filtredTasks = tasks.filter(f =>!f.checked)
+            }
+            if (m.filter === "Completed") {
+                filtredTasks = tasks.filter(f =>f.checked)
+            }
+
+            return (
+                <TodoList
+                    key={m.id}
+                    todolistId={m.id}
+                    title={m.title}
+                    tasks={filtredTasks}
+                    deleteTask={deleteTask}
+                    changeFilter={changeFilter}
+                    addTask={addTask}
+                    changeChekBox={changeChekBox}
+                    filter={m.filter}
+                    setTasks={setTasks}
+                />
+            )
+        })}
+
+
 
     </div>
 }
