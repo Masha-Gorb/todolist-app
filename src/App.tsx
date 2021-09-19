@@ -54,8 +54,15 @@ const App =() => {
     //кинули эту функцию в сетФильтр
 
     let [filter, setFilter] = useState<filterType>("All")
-    const changeFilter = (filterValue: filterType) => {
-        setFilter(filterValue)
+    
+    const changeFilter = (filterValue: filterType,todolistId: string) => {
+        // setFilter(filterValue)
+        console.log(todolistId)
+        let currentTodolist = todolists.find(f=> f.id===todolistId)
+        if(currentTodolist) {
+            currentTodolist.filter=filterValue
+            setTodolists([...todolists])
+        }
     }
 
     // let filtredTasks = tasks

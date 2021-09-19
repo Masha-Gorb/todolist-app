@@ -15,7 +15,7 @@ type propsType = {
     title: string
     tasks: Array<tasksPropsType>
     deleteTask: (taskId: string) => void //void потому что в функции нет return
-    changeFilter: (filterValue: filterType) => void
+    changeFilter: (filterValue: filterType, todolistId: string) => void
     addTask: (newTaskTitle: string) => void
     changeChekBox: (myEvent: boolean, newId: string) => void
     filter: filterType
@@ -66,8 +66,8 @@ export const TodoList = (props: propsType) => {
     //     props.changeFilter('Completed')
     // }
 
-    const changeFilterOptimusHandler = (filterValue: filterType) => {
-        props.changeFilter(filterValue)
+    const changeFilterOptimusHandler = (filterValue: filterType,  todolistId: string) => {
+        props.changeFilter(filterValue, props.todolistId)
     }
 
     const deleteTaskHandler = (tId: string) => {
@@ -108,11 +108,11 @@ export const TodoList = (props: propsType) => {
             </div>
 
 
-            <ButtonUniversal filter={props.filter} title={'All'} callBack={() => changeFilterOptimusHandler('All')}/>
+            <ButtonUniversal filter={props.filter} title={'All'} callBack={() => changeFilterOptimusHandler('All', props.todolistId)}/>
             <ButtonUniversal filter={props.filter} title={'Active'}
-                             callBack={() => changeFilterOptimusHandler('Active')}/>
+                             callBack={() => changeFilterOptimusHandler('Active', props.todolistId)}/>
             <ButtonUniversal filter={props.filter} title={'Completed'}
-                             callBack={() => changeFilterOptimusHandler('Completed')}/>
+                             callBack={() => changeFilterOptimusHandler('Completed', props.todolistId)}/>
 
             {/*<ButtonUniversal title={'All'} callBack={changeAllFilterHandler} />*/}
             {/*<ButtonUniversal title={'Active'} callBack={changeActiveFilterHandler} />*/}
