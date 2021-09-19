@@ -20,37 +20,6 @@ const App =() => {
         {id: v1(), title: "Potato", checked: true}
     ])
 
-    //ДЛЯ ТРЕНИРОВОЧНОЙ КОМПОНЕНТЫ
-    // let [products, setProduct] = useState([
-    //         {id: 1, title: 'Potato', isVegetable: true},
-    //         {id: 2, title: 'Tomato', isVegetable: true},
-    //         {id: 3, title: 'Apple', isVegetable: false},
-    //         {id: 4, title: 'Orange', isVegetable: false},
-    //         {id: 6, title: 'Onion', isVegetable: true},
-    //         {id: 7, title: 'Cabbage', isVegetable: true},
-    //         {id: 8, title: 'Grape', isVegetable: false},
-    //
-    //     ]
-    // )
-    //
-    // const deleteProduct = (productId: number) => {
-    //     let actualProducts = products.filter(f => f.id!==productId)
-    //     setProduct(actualProducts)
-    // }
-    //
-    // let [filter, setFilter] = useState<filterForProductsType>('All')
-    // const changeProductFilter = (filterProductsValue: filterForProductsType) => {
-    //     setFilter(filterProductsValue)
-    // }
-    //
-    // let filtredProducts = products
-    // if (filter === 'Vegetables') {
-    //     filtredProducts= products.filter(f => f.isVegetable)
-    // }
-    // if (filter === 'Fruits') {
-    //     filtredProducts = products.filter(f => !f.isVegetable)
-    // }
-
     //делаем удаление таски
     //передаем функции аргумент(как он найдет что удалять) - в нашем случае найтись может по Id
     //в типизации в Todolist.tsx указываем какой тип получает функция
@@ -65,8 +34,6 @@ const App =() => {
     //
     //     setTasks(deleteTask1)
     // }
-
-
 
     //создали стейт чтобы хранить разные фильтры
     //написали типизацию для стейта - какого типа значения в него будут приходить (мутный момент)
@@ -108,7 +75,12 @@ const App =() => {
             let newTask = {id: v1(), title: newTaskTitle.trim(), checked: true}
             setTasks([newTask, ...tasks])
         }
+    }
 
+    const deleteTask = (taskId: string) => {
+        console.log(taskId)
+        let deleteTask1 = tasks.filter( f => f.id!==taskId )
+        setTasks(deleteTask1)
     }
 
     const changeChekBox = (myEvent: boolean, newId : string) => {
@@ -116,28 +88,14 @@ const App =() => {
         // if(currentTask) {
         //     currentTask.checked=myEvent
         //     setTasks([...tasks])
-
         setTasks(tasks.map(mID => mID.id===newId ? {...mID, checked: myEvent} : mID))
     }
-
-
-    //! ! ! ТРЕНИРОВКА ИНПУТА ! ! !
-    // let [lines, setLines] = useState([
-    //     {id: v1(), title: 'Line 1'},
-    //     {id: v1(), title: 'Line 2'},
-    //     {id: v1(), title: 'Line 3'}
-    // ])
-    //
-    // const addNewLine = (newLineTitle: string) => {
-    //     let newLine = {id: v1(), title: newLineTitle}
-    //     setLines([newLine, ...lines])
-    // }
 
     return <div>
         <TodoList
             title="What to buy"
             tasks={filtredTasks}
-            // deleteTask={deleteTask}
+            deleteTask={deleteTask}
             changeFilter={changeFilter}
             addTask={addTask}
             changeChekBox={changeChekBox}
@@ -145,22 +103,6 @@ const App =() => {
             setTasks={setTasks}
         />
 
-        {/*<NewInput*/}
-        {/*addNewLine={addNewLine}*/}
-        {/*lines={lines}*/}
-        {/*/>*/}
-
-        {/*<NewInput*/}
-        {/*lines={lines}*/}
-        {/*addNewLine={addNewLine}*/}
-        {/*/>*/}
-
-        {/*<Grosery*/}
-        {/*    name={'Healthy list'}*/}
-        {/*product={filtredProducts}*/}
-        {/*    deleteProduct={deleteProduct}*/}
-        {/*    changeProductFilter={changeProductFilter}*/}
-        {/*/>*/}
     </div>
 }
 
