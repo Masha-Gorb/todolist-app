@@ -1,17 +1,22 @@
 import {multiply, sum} from "./01";
 
-test( 'смотри в оба, тупая псина', () => {
-    //сперва данные
+test( 'sum should be correct', () => {
+    //подготовительные данные
     const a = 1;
     const b = 2;
     const c = 5;
 
-    //теперь действие
+    //действие
     const result = sum(a,b)
-    const result2 = multiply(b, c)
 
     //что ожидаем от действия
     expect(result).toBe(3)
-    expect(result2).toBe(10)
+})
+
+test( 'multiply should be correct', ()=> {
+    const a = 4;
+    const b = 8;
+    const result2 = multiply(a, b)
+    expect(result2).toBe(32)
 
 })
