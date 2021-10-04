@@ -14,7 +14,7 @@ export type HouseType = {
 }
 
 export type AddressType = {
-    number: number
+    number?: number
     street: StreetType
 }
 
