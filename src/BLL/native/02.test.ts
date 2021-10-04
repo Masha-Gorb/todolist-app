@@ -23,7 +23,10 @@ export type StreetType = {
 }
 
 export type BuildingsType = {
-
+    type: "HOSPITAL" | "FIRE-STATION"
+    budget: number
+    staffCount: number
+    address: AddressType
 }
 
 beforeEach(() => {
@@ -56,7 +59,26 @@ beforeEach(() => {
                     }
                 }}
         ],
-        governmentBuildings: [],
+        governmentBuildings: [
+            {type: "HOSPITAL",
+                budget: 200000,
+                staffCount: 200,
+                address: {
+                street: {
+                    title: "Central Str"
+                }
+                }
+            },
+
+            {type: "FIRE-STATION",
+                budget: 500000,
+                staffCount: 1000,
+                address: {
+                    street: {
+                        title: "South Str"
+                    }
+                }}
+        ],
         citizensNumber: 1000000
     }
 })
@@ -84,7 +106,7 @@ test("test city should contains 3 houses", () => {
 
 // 01. дополните тип GovernmentBuildingType
 // 02. заполните объект city, чтобы тесты ниже прошли
-test.skip("test city should contains hospital and fire station", () => {
+test("test city should contains hospital and fire station", () => {
     expect(city.governmentBuildings.length).toBe(2);
 
     expect(city.governmentBuildings[0].type).toBe("HOSPITAL");
