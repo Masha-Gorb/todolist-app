@@ -1,4 +1,4 @@
-import {filterHousesToDemolish} from "./04";
+import {filterHousesToDemolish, filterStaffCount} from "./04";
 
 export type CoursesType = {
     courses1: Array<CourseType>
@@ -105,7 +105,7 @@ beforeEach(() => {
 
             {type: "FIRE-STATION",
                 budget: 500000,
-                staffCount: 1000,
+                staffCount: 100,
                 address: {
                     street: {
                         title: "South Str"
@@ -122,5 +122,11 @@ test ('function should filter which houses we must demolish', ()=> {
     expect(city.houses.length).toBe(1)
     expect(city.houses[0].id).toBe(1)
     expect(city.houses[0].address.street.title).toBe('White street')
+
+})
+
+test('staff count should be more than', ()=> {
+    filterStaffCount(city.governmentBuildings, 500)
+    expect(city.governmentBuildings.length).toBe(2)
 
 })
