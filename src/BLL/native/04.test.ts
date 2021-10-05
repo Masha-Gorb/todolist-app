@@ -1,4 +1,4 @@
-import {filterHousesToDemolish, filterStaffCount} from "./04";
+import {filterHousesToDemolish, filterOldHouses, filterStaffCount} from "./04";
 
 export type CoursesType = {
     courses1: Array<CourseType>
@@ -128,5 +128,9 @@ test ('function should filter which houses we must demolish', ()=> {
 test('staff count should be more than', ()=> {
     filterStaffCount(city.governmentBuildings, 500)
     expect(city.governmentBuildings.length).toBe(2)
+})
 
+test('filter houses which build early than year', () => {
+    filterOldHouses(city, 2015)
+    expect(city.houses.length).toBe(2)
 })

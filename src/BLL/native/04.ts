@@ -7,3 +7,7 @@ export function filterHousesToDemolish(city: CityType, street: string) {
 export function filterStaffCount(governmentBuildings: Array<BuildingsType>, number: number) {
     governmentBuildings = governmentBuildings.filter(g => g.staffCount > number)
 }
+
+export function filterOldHouses(city: CityType, year: number) {
+    city.houses = city.houses.filter(h => h.buildedAt < year)
+}
