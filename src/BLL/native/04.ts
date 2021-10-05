@@ -1,20 +1,5 @@
-export type Courses1Type = {
-    courses1: Array<CourseType>
-}
+import {CityType} from "./04.test";
 
-export type CourseType = {
-    title: string
-    price: number
-}
-
-let courses1 = [
-    {title: "Cooking", price: 890},
-    {title: "Reading", price: 479},
-    {title: "Swimming", price: 390},
-    {title: "Programming", price: 567},
-    {title: "New Language", price: 300},
-]
-
-export const filterCourse = (course: CourseType) => {
-    courses1.filter(course => course.price < 500)
+export function filterHousesToDemolish(city: CityType, street: string) {
+    city.houses = city.houses.filter(h => street !== h.address.street.title)
 }
