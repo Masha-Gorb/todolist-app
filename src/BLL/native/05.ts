@@ -21,3 +21,7 @@ let students = [
 export const makeFunnyName = (students: Array<OneStudentType>, call: string) => {
     students.map( s => s.secondName = call)
 }
+
+export const makeProgrammer = (students: Array<OneStudentType>, study: boolean) => {
+    students.map( st => st.isProgrammer = true)
+}

@@ -1,4 +1,4 @@
-import {makeFunnyName, OneStudentType} from "./05";
+import {makeFunnyName, makeProgrammer} from "./05";
 
 export type StudentsType = {
     students: Array<OneStudentType>
@@ -20,7 +20,9 @@ test('all lastName should be as i want', () => {
         {id: 5, firstName: "Oleg", secondName: 'Rofl', isProgrammer: false}
     ]
     makeFunnyName(a, 'yebanov')
+    makeProgrammer(a, true)
     expect(a[4].secondName).toBe('yebanov')
+    expect(a[2].isProgrammer).toBe(true)
 })
 
 
