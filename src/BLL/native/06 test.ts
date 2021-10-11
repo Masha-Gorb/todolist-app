@@ -21,8 +21,10 @@ test('testing github actually', () => {
         ]
     }
 
-    const {name, age} = student
+    const {name, age} = student //деструктуризация объекта
 
     expect(age).toBe(44)
+    expect(name).toBe('Lol')
+
 
 })
