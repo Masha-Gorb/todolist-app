@@ -11,7 +11,7 @@ test('this should work fine', () => {
     }
 
     const trainer = (user: UserType, trainings: number) => {
-        let copyUser = {
+        const copyUser = {
             ...user,
             weight: user.weight - trainings
         }
