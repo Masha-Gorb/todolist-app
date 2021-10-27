@@ -15,7 +15,7 @@ export type PropsType = {
     changeTaskStatus: (taskId: string, isDone: boolean) => void
 }
 
-export function Todolist(props: PropsType) {
+export function Todolist({tasks, removeTask, changeTaskStatus, ...props}: PropsType) {
 
     let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
@@ -41,13 +41,13 @@ export function Todolist(props: PropsType) {
     }
 
     let [filter, setFilter] = useState<FilterValuesType>("all");
-    let tasksForTodolist = props.tasks;
+    let tasksForTodolist = tasks;
 
     if (filter === "active") {
-        tasksForTodolist = props.tasks.filter(t => !t.isDone)
+        tasksForTodolist = tasks.filter(t => !t.isDone)
     }
     if (filter === "completed") {
-        tasksForTodolist = props.tasks.filter(t => t.isDone)
+        tasksForTodolist = tasks.filter(t => t.isDone)
     }
 
     function changeFilter(value: FilterValuesType) {
@@ -74,9 +74,9 @@ export function Todolist(props: PropsType) {
         <ul>
             {
                 tasksForTodolist.map(t => {
-                    const onClickHandler = () => props.removeTask(t.id)
+                    const onClickHandler = () => removeTask(t.id)
                     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                        props.changeTaskStatus(t.id, e.currentTarget.checked);
+                        changeTaskStatus(t.id, e.currentTarget.checked);
                     }
 
                     return <li key={t.id} className={t.isDone ? "is-done" : ""}>
