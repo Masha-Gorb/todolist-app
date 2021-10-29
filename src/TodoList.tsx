@@ -95,4 +95,4 @@ export const TodoList = (props: propsType) => {
 
         </div>
     )
-}
+};
