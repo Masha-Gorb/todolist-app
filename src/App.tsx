@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import {TodoList} from "./TodoList";
 import {v1} from "uuid";
 import {NewInput} from "./Components/NewInput";
+import {inspect} from "util";
+import styles from './App.module.css'
 
 export type filterType = "All" | "Active" | "Completed"
 export type TodolistsType = {
@@ -134,6 +136,9 @@ const App =() => {
                 setTasks({...tasks})
         }
 
+        // setTasks({...tasks, [todolistId]:tasks[todolistId].find(ft=> ft.id===newId)})
+
+
         // let currentTask=tasks.find(ft => ft.id===id)
         // if(currentTask) {
         //     currentTask.checked=myEvent
@@ -141,36 +146,35 @@ const App =() => {
         // setTasks(tasks.map(mID => mID.id===newId ? {...mID, checked: myEvent} : mID))
     }
 
-    return <div>
-        {todolists.map( (m) => {
+    return (
+        <div className={styles.App}>
+            {todolists.map( (m) => {
 
-            let filtredTasks = tasks[m.id]
-            if (m.filter === "Active") {
-                filtredTasks = tasks[m.id].filter(f =>!f.checked)
-            }
-            if (m.filter === "Completed") {
-                filtredTasks = tasks[m.id].filter(f =>f.checked)
-            }
+                let filtredTasks = tasks[m.id]
+                if (m.filter === "Active") {
+                    filtredTasks = tasks[m.id].filter(f =>!f.checked)
+                }
+                if (m.filter === "Completed") {
+                    filtredTasks = tasks[m.id].filter(f =>f.checked)
+                }
+                return (
+                    <TodoList
+                        key={m.id}
+                        todolistId={m.id}
+                        title={m.title}
+                        tasks={filtredTasks}
+                        deleteTask={deleteTask}
+                        changeFilter={changeFilter}
+                        addTask={addTask}
+                        changeChekBox={changeChekBox}
+                        filter={m.filter}
+                        // setTasks={setTasks}
+                    />
+                )
+            })}
+        </div>
+        )
 
-            return (
-                <TodoList
-                    key={m.id}
-                    todolistId={m.id}
-                    title={m.title}
-                    tasks={filtredTasks}
-                    deleteTask={deleteTask}
-                    changeFilter={changeFilter}
-                    addTask={addTask}
-                    changeChekBox={changeChekBox}
-                    filter={m.filter}
-                    // setTasks={setTasks}
-                />
-            )
-        })}
-
-
-
-    </div>
 }
 
 

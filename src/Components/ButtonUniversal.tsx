@@ -28,7 +28,7 @@ export const ButtonUniversal = (props: PropsType) => {
         props.callBack()
     }
     return (
-        <div>
+        <div className={styles.button}>
             <button className={styles.activeFilter} onClick={callBackHandler}>{props.title}</button>
         </div>
     )

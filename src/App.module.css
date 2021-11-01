@@ -1,3 +1,9 @@
+.App {
+    background-color: lightskyblue;
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .error {
     border: red 1px solid
 }
@@ -6,6 +12,9 @@
     color: red;
 }
 
+.button {
+    position: relative;
+}
 .activeFilter:focus {
     background-color: aquamarine;
 }
