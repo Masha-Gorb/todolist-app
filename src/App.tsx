@@ -106,10 +106,14 @@ const App =() => {
     //тестим - заставляем в консоли показать ивент.кюрентТарджет.value
 
     const addTask = (todolistId: string, newTaskTitle: string) => {
-        let currentTodolistId = tasks[todolistId]
-        let newTask = {id: v1(), title: newTaskTitle.trim(), checked: false}
-        tasks[todolistId]=[newTask, ...tasks[todolistId]]
-        setTasks({...tasks})
+        // let currentTodolistId = tasks[todolistId]
+        // let newTask = {id: v1(), title: newTaskTitle.trim(), checked: false}
+        // tasks[todolistId]=[newTask, ...tasks[todolistId]]
+        // setTasks({...tasks})
+
+        setTasks({...tasks, [todolistId]: [{id: v1(), title: newTaskTitle.trim(), checked: false}, ...tasks[todolistId]]})
+
+
         // if(newTaskTitle.trim()!=="") {
         //     let newTask = {id: v1(), title: newTaskTitle.trim(), checked: true}
         //     setTasks([newTask, ...tasks])
