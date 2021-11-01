@@ -117,9 +117,9 @@ const App =() => {
     }
 
     const deleteTask = (todolistId: string, taskId: string) => {
-        let currentTodolistId = tasks[todolistId]
-        tasks[todolistId] = currentTodolistId.filter(f=>f.id!==taskId)
-        setTasks({...tasks})
+        // let currentTodolistId = tasks[todolistId]
+        // tasks[todolistId] = currentTodolistId.filter(f=>f.id!==taskId)
+        setTasks({...tasks, [todolistId]: tasks[todolistId].filter(f=>f.id!==taskId)})
     }
 
     const changeChekBox = (todolistId: string, myEvent: boolean, newId : string) => {
