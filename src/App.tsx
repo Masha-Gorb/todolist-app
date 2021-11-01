@@ -1,9 +1,13 @@
 import React, {useState} from 'react'
-import {TodoList} from "./TodoList";
+import {tasksPropsType, TodoList} from "./TodoList";
 import {v1} from "uuid";
 import {NewInput} from "./Components/NewInput";
 import {inspect} from "util";
 import styles from './App.module.css'
+
+export type TaskType = {
+    [key: string] : Array<tasksPropsType>
+}
 
 export type filterType = "All" | "Active" | "Completed"
 export type TodolistsType = {
@@ -22,7 +26,7 @@ const App =() => {
         {id: todolistID2, title: 'What to buy', filter: 'All'}
     ])
 
-    let [tasks, setTasks] = useState({
+    let [tasks, setTasks] = useState<TaskType>({
         [todolistID1]:[
             {id: v1(), title: "Bread", checked: true},
             {id: v1(), title: "Milk", checked: true},
@@ -88,7 +92,6 @@ const App =() => {
             setTodolists([...todolists])
         }
     }
-
     // let filtredTasks = tasks
     // if (filter === "Active") {
     //     filtredTasks = tasks.filter(f =>!f.checked)
@@ -108,14 +111,11 @@ const App =() => {
     //тестим - заставляем в консоли показать ивент.кюрентТарджет.value
 
     const addTask = (todolistId: string, newTaskTitle: string) => {
+        setTasks({...tasks, [todolistId]: [{id: v1(), title: newTaskTitle.trim(), checked: false}, ...tasks[todolistId]]})
         // let currentTodolistId = tasks[todolistId]
         // let newTask = {id: v1(), title: newTaskTitle.trim(), checked: false}
         // tasks[todolistId]=[newTask, ...tasks[todolistId]]
         // setTasks({...tasks})
-
-        setTasks({...tasks, [todolistId]: [{id: v1(), title: newTaskTitle.trim(), checked: false}, ...tasks[todolistId]]})
-
-
         // if(newTaskTitle.trim()!=="") {
         //     let newTask = {id: v1(), title: newTaskTitle.trim(), checked: true}
         //     setTasks([newTask, ...tasks])
@@ -135,16 +135,18 @@ const App =() => {
             currentTask.checked=myEvent
                 setTasks({...tasks})
         }
-
         // setTasks({...tasks, [todolistId]:tasks[todolistId].find(ft=> ft.id===newId)})
-
-
         // let currentTask=tasks.find(ft => ft.id===id)
         // if(currentTask) {
         //     currentTask.checked=myEvent
         //     setTasks([...tasks])
         // setTasks(tasks.map(mID => mID.id===newId ? {...mID, checked: myEvent} : mID))
     }
+
+    const deleteWholeList = (todolistId: string) => {
+        setTodolists(todolists.filter(f=>f.id!==todolistId))
+    }
+
 
     return (
         <div className={styles.App}>
@@ -168,6 +170,7 @@ const App =() => {
                         addTask={addTask}
                         changeChekBox={changeChekBox}
                         filter={m.filter}
+                        deleteWholeList={deleteWholeList}
                         // setTasks={setTasks}
                     />
                 )

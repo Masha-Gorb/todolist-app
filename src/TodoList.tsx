@@ -1,9 +1,9 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
+import React, {ChangeEvent, KeyboardEvent, MouseEventHandler, useState} from 'react'
 import {filterType} from "./App";
 import {ButtonUniversal} from "./Components/ButtonUniversal";
 import styles from './App.module.css'
 
-type tasksPropsType = {
+export type tasksPropsType = {
     id: string
     title: string
     checked: boolean
@@ -19,6 +19,7 @@ type propsType = {
     addTask: (todolistId: string, newTaskTitle: string) => void
     changeChekBox: (todolistId: string, myEvent: boolean, newId: string) => void
     filter: filterType
+    deleteWholeList: (todolistId: string) => void
     // setTasks: (tasks: Array<tasksPropsType>) => void
 }
 
@@ -58,9 +59,14 @@ export const TodoList = (props: propsType) => {
         props.changeChekBox(props.todolistId, event.currentTarget.checked, newId)
     }
 
+    const deleteWholeListHandler = () => {
+        props.deleteWholeList(props.todolistId)
+    }
+
     return (
         <div>
             <h2>{props.title}</h2>
+            <button onClick={deleteWholeListHandler}> delete </button>
 
             <input className={error ? styles.error : ''} value={newTaskTitle} onChange={onChangeHandler}
                    onKeyPress={onKeyPressHandler}/>
@@ -95,4 +101,4 @@ export const TodoList = (props: propsType) => {
 
         </div>
     )
-};
+}
