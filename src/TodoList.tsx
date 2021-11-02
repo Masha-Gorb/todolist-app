@@ -68,7 +68,7 @@ export const TodoList = (props: propsType) => {
         <div>
             <h2>{props.title}</h2>
             <button onClick={deleteWholeListHandler}> delete </button>
-
+            <AddItemForm/>
             <input className={error ? styles.error : ''} value={newTaskTitle} onChange={onChangeHandler}
                    onKeyPress={onKeyPressHandler}/>
 
@@ -83,9 +83,8 @@ export const TodoList = (props: propsType) => {
                                     <ButtonUniversal filter={props.filter} title={"x"}
                                                      callBack={() => deleteTaskHandler(m.id)}/>
                                     {/*<button onClick={ () => onChangeDeleteTaskHandler(m.id)}>x</button>*/}
-                                    <AddItemForm/>
-                                    {/*<input type="checkbox" onChange={(event) => onChangeCheckBoxHandler(event, m.id)}*/}
-                                    {/*       checked={m.checked}/>*/}
+                                    <input type="checkbox" onChange={(event) => onChangeCheckBoxHandler(event, m.id)}
+                                           checked={m.checked}/>
                                     <span className={m.checked ? styles.isDone : ''}>{m.title}</span>
                                 </li>
                             )
