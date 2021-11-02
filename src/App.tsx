@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
 import {tasksPropsType, TodoList} from "./TodoList";
 import {v1} from "uuid";
-import {NewInput} from "./Components/NewInput";
-import {inspect} from "util";
 import styles from './App.module.css'
 
 export type TaskType = {
