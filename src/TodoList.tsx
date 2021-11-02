@@ -26,26 +26,26 @@ type propsType = {
 
 export const TodoList = (props: propsType) => {
 
-    let [newTaskTitle, setNewTaskTitle] = useState('')
-    let [error, setError] = useState(true)
+    // let [newTaskTitle, setNewTaskTitle] = useState('')
+    // let [error, setError] = useState(true)
 
-    const addTaskHandler = () => {
-        props.addTask(props.todolistId, newTaskTitle)
-        setNewTaskTitle('')
-        setError(false)
-    }
-    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setError(false)
-        setNewTaskTitle(event.currentTarget.value)
-    }
+    // const addTaskHandler = () => {
+    //     props.addTask(props.todolistId, newTaskTitle)
+    //     setNewTaskTitle('')
+    //     setError(false)
+    // }
+    // const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setError(false)
+    //     setNewTaskTitle(event.currentTarget.value)
+    // }
 
-    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            props.addTask(props.todolistId, newTaskTitle)
-            setNewTaskTitle('')
-            setError(false)
-        }
-    }
+    // const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    //     if (event.key === 'Enter') {
+    //         props.addTask(props.todolistId, newTaskTitle)
+    //         setNewTaskTitle('')
+    //         setError(false)
+    //     }
+    // }
 
     const changeFilterOptimusHandler = (filterValue: filterType, todolistId: string) => {
         props.changeFilter(filterValue, todolistId)
@@ -66,14 +66,25 @@ export const TodoList = (props: propsType) => {
 
     return (
         <div>
-            <h2>{props.title}</h2>
-            <button onClick={deleteWholeListHandler}> delete </button>
-            <AddItemForm/>
-            <input className={error ? styles.error : ''} value={newTaskTitle} onChange={onChangeHandler}
-                   onKeyPress={onKeyPressHandler}/>
 
-            <button onClick={addTaskHandler}>+</button>
-            {error && <div className={styles.errorMessage}>Title is required</div>}
+            <div>
+                <h2>{props.title}</h2>
+                <button onClick={deleteWholeListHandler}> delete </button>
+            </div>
+
+            <div>
+                <AddItemForm
+                    addTask={props.addTask}
+                    todolistId={props.todolistId}
+                />
+                {/*<input className={error ? styles.error : ''}*/}
+                {/*       value={newTaskTitle}*/}
+                {/*       onChange={onChangeHandler}*/}
+                {/*       onKeyPress={onKeyPressHandler}/>*/}
+
+                {/*<button onClick={addTaskHandler}>+</button>*/}
+                {/*{error && <div className={styles.errorMessage}>Title is required</div>}*/}
+            </div>
 
             <div>
                 <ul>
