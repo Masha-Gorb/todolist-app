@@ -2,7 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
 import styles from "../App.module.css";
 
 type PropsType = {
-    addTask: (todolistId: string, newTaskTitle: string) => void
+    callBack: (todolistId: string, newTaskTitle: string) => void
     todolistId: string
 }
 
@@ -16,13 +16,13 @@ export const AddItemForm = (props: PropsType) => {
     }
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            props.addTask(props.todolistId, newTaskTitle)
+            props.callBack(props.todolistId, newTaskTitle)
             setNewTaskTitle('')
             setError(false)
         }
     }
     const addTaskHandler = () => {
-        props.addTask(props.todolistId, newTaskTitle)
+        props.callBack(props.todolistId, newTaskTitle)
         setNewTaskTitle('')
         setError(false)
     }

@@ -79,7 +79,7 @@ export const TodoList = (props: propsType) => {
 
             <div>
                 <AddItemForm
-                    addTask={addTaskHandler}
+                    callBack={addTaskHandler}
                     todolistId={props.todolistId}
                 />
                 {/*<input className={error ? styles.error : ''}*/}
