@@ -125,7 +125,6 @@ const App =() => {
         // tasks[todolistId] = currentTodolistId.filter(f=>f.id!==taskId)
         setTasks({...tasks, [todolistId]: tasks[todolistId].filter(f=>f.id!==taskId)})
     }
-
     const changeChekBox = (todolistId: string, myEvent: boolean, newId : string) => {
         let currentTodolistId = tasks[todolistId]
         let currentTask = tasks[todolistId].find(ft=> ft.id===newId)
@@ -140,11 +139,9 @@ const App =() => {
         //     setTasks([...tasks])
         // setTasks(tasks.map(mID => mID.id===newId ? {...mID, checked: myEvent} : mID))
     }
-
     const deleteWholeList = (todolistId: string) => {
         setTodolists(todolists.filter(f=>f.id!==todolistId))
     }
-
 
     return (
         <div className={styles.App}>

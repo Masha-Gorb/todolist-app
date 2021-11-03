@@ -21,6 +21,7 @@ type propsType = {
     changeChekBox: (todolistId: string, myEvent: boolean, newId: string) => void
     filter: filterType
     deleteWholeList: (todolistId: string) => void
+    // newTaskTitle: string
     // setTasks: (tasks: Array<tasksPropsType>) => void
 }
 
@@ -64,17 +65,21 @@ export const TodoList = (props: propsType) => {
         props.deleteWholeList(props.todolistId)
     }
 
+    const addTaskHandler = (todolistId: string, newTaskTitle: string) => {
+        props.addTask(props.todolistId, newTaskTitle)
+    }
+
     return (
         <div>
 
             <div>
                 <h2>{props.title}</h2>
-                <button onClick={deleteWholeListHandler}> delete </button>
+                <button onClick={deleteWholeListHandler}>delete</button>
             </div>
 
             <div>
                 <AddItemForm
-                    addTask={props.addTask}
+                    addTask={addTaskHandler}
                     todolistId={props.todolistId}
                 />
                 {/*<input className={error ? styles.error : ''}*/}

@@ -4,7 +4,6 @@ import styles from "../App.module.css";
 type PropsType = {
     addTask: (todolistId: string, newTaskTitle: string) => void
     todolistId: string
-
 }
 
 export const AddItemForm = (props: PropsType) => {
@@ -15,7 +14,6 @@ export const AddItemForm = (props: PropsType) => {
         setError(false)
         setNewTaskTitle(event.currentTarget.value)
     }
-
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             props.addTask(props.todolistId, newTaskTitle)
@@ -23,13 +21,11 @@ export const AddItemForm = (props: PropsType) => {
             setError(false)
         }
     }
-
     const addTaskHandler = () => {
         props.addTask(props.todolistId, newTaskTitle)
         setNewTaskTitle('')
         setError(false)
     }
-
     return (
         <div>
             <input className={error ? styles.error : ''}
