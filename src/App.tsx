@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {tasksPropsType, TodoList} from "./TodoList";
 import {v1} from "uuid";
 import styles from './App.module.css'
+import {AddItemForm} from "./Components/AddItemForm";
 
 export type TaskType = {
     [key: string] : Array<tasksPropsType>
@@ -43,6 +44,12 @@ const App =() => {
         {id: v1(), title: "Potato", checked: true}
     ]
     })
+
+    const AddTodoList = (todolistId: string, newTodoListTitle: string) => {
+        setTodolists([...todolists, {id: todolistId, title: newTodoListTitle, filter: 'All'}])
+        // setTasks({...tasks, [todolistId]: [{id: v1(), title: newTaskTitle.trim(), checked: false}, ...tasks[todolistId]]})
+
+    }
 
     // let [tasks, setTasks] = useState([
     //     {id: v1(), title: "Bread", checked: true},
@@ -144,7 +151,12 @@ const App =() => {
     }
 
     return (
+
         <div className={styles.App}>
+            <AddItemForm
+                callBack={AddTodoList}
+                todolistId={todolistID1}
+            />
             {todolists.map( (m) => {
 
                 let filtredTasks = tasks[m.id]
