@@ -39,8 +39,9 @@ const App =() => {
     })
 
     const AddTodoList = (todolistId: string, newTodoListTitle: string) => {
-        setTodolists([{id: todolistId, title: newTodoListTitle, filter: 'All'}, ...todolists])
-        setTasks({...tasks, [todolistId]:[]})
+        let newTodolistID = v1();
+        setTodolists([{id: newTodolistID, title: newTodoListTitle, filter: 'All'}, ...todolists])
+        setTasks({...tasks, [newTodolistID]:[]})
     }
 
     // let [tasks, setTasks] = useState([
