@@ -3,6 +3,7 @@ import {filterType} from "./App";
 import {ButtonUniversal} from "./Components/ButtonUniversal";
 import styles from './App.module.css'
 import {AddItemForm} from "./Components/AddItemForm";
+import {EditableSpan} from "./Components/EditableSpan";
 
 export type tasksPropsType = {
     id: string
@@ -101,7 +102,11 @@ export const TodoList = (props: propsType) => {
                                     {/*<button onClick={ () => onChangeDeleteTaskHandler(m.id)}>x</button>*/}
                                     <input type="checkbox" onChange={(event) => onChangeCheckBoxHandler(event, m.id)}
                                            checked={m.checked}/>
-                                    <span className={m.checked ? styles.isDone : ''}>{m.title}</span>
+                                    <EditableSpan
+                                      title={m.title}
+                                      checked={m.checked}
+                                    />
+                                    {/*<span className={m.checked ? styles.isDone : ''}>{m.title}</span>*/}
                                 </li>
                             )
                         }
