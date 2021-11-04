@@ -27,28 +27,20 @@ const App =() => {
 
     let [tasks, setTasks] = useState<TaskType>({
         [todolistID1]:[
-            {id: v1(), title: "Bread", checked: true},
-            {id: v1(), title: "Milk", checked: true},
-            {id: v1(), title: "Oil", checked: false},
-            {id: v1(), title: "Eggs", checked: false},
-            {id: v1(), title: "Sausages", checked: false},
-            {id: v1(), title: "Potato", checked: true}
+            {id: v1(), title: "react", checked: false},
+            {id: v1(), title: "angular", checked: true}
         ],
 
         [todolistID2]:[
-        {id: v1(), title: "Bread", checked: true},
+        {id: v1(), title: "Bread", checked: false},
         {id: v1(), title: "Milk", checked: true},
-        {id: v1(), title: "Oil", checked: false},
-        {id: v1(), title: "Eggs", checked: false},
-        {id: v1(), title: "Sausages", checked: false},
-        {id: v1(), title: "Potato", checked: true}
+        {id: v1(), title: "Oil", checked: false}
     ]
     })
 
     const AddTodoList = (todolistId: string, newTodoListTitle: string) => {
-        setTodolists([...todolists, {id: todolistId, title: newTodoListTitle, filter: 'All'}])
-        // setTasks({...tasks, [todolistId]: [{id: v1(), title: newTaskTitle.trim(), checked: false}, ...tasks[todolistId]]})
-
+        setTodolists([{id: todolistId, title: newTodoListTitle, filter: 'All'}, ...todolists])
+        setTasks({...tasks, [todolistId]:[]})
     }
 
     // let [tasks, setTasks] = useState([

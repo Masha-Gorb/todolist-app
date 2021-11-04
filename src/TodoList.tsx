@@ -94,7 +94,6 @@ export const TodoList = (props: propsType) => {
             <div>
                 <ul>
                     {props.tasks.map(m => {
-
                             return (
                                 <li key={m.id}>
                                     <ButtonUniversal filter={props.filter} title={"x"}
