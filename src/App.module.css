@@ -10,11 +10,13 @@
 }
 
 .error {
-    border: red 1px solid
+    border: red 1px solid;
+    margin-top: 30pt;
 }
 
 .errorMessage {
     color: red;
+    margin-top: 10pt;
 }
 
 .button {
