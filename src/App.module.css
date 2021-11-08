@@ -4,6 +4,11 @@
     justify-content: space-evenly;
 }
 
+.li {
+    display: flex;
+    margin-top: 5pt;
+}
+
 .error {
     border: red 1px solid
 }

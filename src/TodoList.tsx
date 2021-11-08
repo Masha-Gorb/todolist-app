@@ -97,16 +97,19 @@ export const TodoList = (props: propsType) => {
                     {props.tasks.map(m => {
                             return (
                                 <li key={m.id}>
-                                    <ButtonUniversal filter={props.filter} title={"x"}
-                                                     callBack={() => deleteTaskHandler(m.id)}/>
-                                    {/*<button onClick={ () => onChangeDeleteTaskHandler(m.id)}>x</button>*/}
-                                    <input type="checkbox" onChange={(event) => onChangeCheckBoxHandler(event, m.id)}
-                                           checked={m.checked}/>
-                                    <EditableSpan
-                                      title={m.title}
-                                      checked={m.checked}
-                                    />
-                                    {/*<span className={m.checked ? styles.isDone : ''}>{m.title}</span>*/}
+                                    <span className={styles.li}>
+                                        <ButtonUniversal filter={props.filter} title={"x"}
+                                                         callBack={() => deleteTaskHandler(m.id)}/>
+                                        {/*<button onClick={ () => onChangeDeleteTaskHandler(m.id)}>x</button>*/}
+                                        <input type="checkbox" onChange={(event) => onChangeCheckBoxHandler(event, m.id)}
+                                               checked={m.checked}/>
+                                        <EditableSpan
+                                            title={m.title}
+                                            checked={m.checked}
+                                        />
+                                        {/*<span className={m.checked ? styles.isDone : ''}>{m.title}</span>*/}
+                                    </span>
+
                                 </li>
                             )
                         }

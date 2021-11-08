@@ -28,7 +28,8 @@ const App =() => {
     let [tasks, setTasks] = useState<TaskType>({
         [todolistID1]:[
             {id: v1(), title: "react", checked: false},
-            {id: v1(), title: "angular", checked: true}
+            {id: v1(), title: "angular", checked: true},
+            {id: v1(), title: "vue", checked: false},
         ],
 
         [todolistID2]:[
