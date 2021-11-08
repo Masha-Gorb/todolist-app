@@ -117,12 +117,15 @@ export const TodoList = (props: propsType) => {
                 </ul>
             </div>
 
-            <ButtonUniversal filter={props.filter} title={'All'}
-                             callBack={() => changeFilterOptimusHandler('All', props.todolistId)}/>
-            <ButtonUniversal filter={props.filter} title={'Active'}
-                             callBack={() => changeFilterOptimusHandler('Active', props.todolistId)}/>
-            <ButtonUniversal filter={props.filter} title={'Completed'}
-                             callBack={() => changeFilterOptimusHandler('Completed', props.todolistId)}/>
+            <div className={styles.bottomButtons}>
+                <ButtonUniversal filter={props.filter} title={'All'}
+                                 callBack={() => changeFilterOptimusHandler('All', props.todolistId)}/>
+                <ButtonUniversal filter={props.filter} title={'Active'}
+                                 callBack={() => changeFilterOptimusHandler('Active', props.todolistId)}/>
+                <ButtonUniversal filter={props.filter} title={'Completed'}
+                                 callBack={() => changeFilterOptimusHandler('Completed', props.todolistId)}/>
+
+            </div>
 
         </div>
     )

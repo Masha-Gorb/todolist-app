@@ -8,6 +8,9 @@
     display: flex;
     margin-top: 5pt;
 }
+.bottomButtons {
+    display: flex;
+}
 
 .error {
     border: red 1px solid;
