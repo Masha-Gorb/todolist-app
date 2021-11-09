@@ -11,9 +11,13 @@ export const EditableSpan = (props: PropsType) => {
     const editTrue = () => {
         setEdit(true)
     }
+
+    const editFalse = () => {
+        setEdit(false)
+    }
     return (
         edit
-        ? <input value={props.title}/>
+        ? <input value={props.title} onKeyPress={editFalse}/>
         : <div>
             <span onDoubleClick={editTrue} className={props.checked ? styles.isDone : ''}>{props.title}</span>
         </div>
