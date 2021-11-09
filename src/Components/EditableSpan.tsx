@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styles from "../App.module.css";
 
 export type PropsType = {
@@ -7,8 +7,11 @@ export type PropsType = {
 }
 
 export const EditableSpan = (props: PropsType) => {
+    const[edit, setEdit] = useState(false)
     return (
-        <div>
+        edit
+        ? <input value={props.title}/>
+        : <div>
             <span className={props.checked ? styles.isDone : ''}>{props.title}</span>
         </div>
     )
