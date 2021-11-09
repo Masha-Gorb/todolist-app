@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {KeyboardEvent, useState} from 'react'
 import styles from "../App.module.css";
 
 export type PropsType = {
@@ -12,8 +12,11 @@ export const EditableSpan = (props: PropsType) => {
         setEdit(true)
     }
 
-    const editFalse = () => {
-        setEdit(false)
+    const editFalse = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            setEdit(false)
+        }
+
     }
     return (
         edit
