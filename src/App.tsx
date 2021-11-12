@@ -3,7 +3,7 @@ import {tasksPropsType, TodoList} from "./TodoList";
 import {v1} from "uuid";
 import styles from './App.module.css'
 import {AddItemForm} from "./Components/AddItemForm";
-import {AddTodolistAC, TodolistReducer} from "./redux/TaskReducer";
+import {AddTodolistAC, DeleteWholeTodolistAC, TodolistReducer} from "./redux/TaskReducer";
 
 export type TaskType = {
     [key: string] : Array<tasksPropsType>
@@ -26,12 +26,11 @@ const App =() => {
     //     {id: todolistID2, title: 'What to buy', filter: 'All'}
     // ])
 
+    //почему редьюсер пришлось колхозно типизировать? не ясно
     let [todolists, TodolistDispatch] = useReducer<Reducer<any, any>>(TodolistReducer, [
         {id: todolistID1, title: 'What to learn', filter: 'All'},
         {id: todolistID2, title: 'What to buy', filter: 'All'}
     ])
-
-
 
     let [tasks, setTasks] = useState<TaskType>({
         [todolistID1]:[
@@ -53,6 +52,11 @@ const App =() => {
         TodolistDispatch(AddTodolistAC(todolistId, newTodoListTitle))
         // setTodolists([{id: newTodolistID, title: newTodoListTitle, filter: 'All'}, ...todolists])
         // setTasks({...tasks, [newTodolistID]:[]})
+    }
+
+    const deleteWholeList = (todolistId: string) => {
+        TodolistDispatch(DeleteWholeTodolistAC(todolistId))
+        // setTodolists(todolists.filter(f=>f.id!==todolistId))
     }
 
     // let [tasks, setTasks] = useState([
@@ -95,6 +99,7 @@ const App =() => {
     const changeFilter = (filterValue: filterType,todolistId: string) => {
         // setFilter(filterValue)
         console.log(todolistId)
+        // убрать колхозную типизацию f
         let currentTodolist = todolists.find((f:any) => f.id===todolistId)
         if(currentTodolist) {
             currentTodolist.filter=filterValue
@@ -149,9 +154,8 @@ const App =() => {
         //     setTasks([...tasks])
         // setTasks(tasks.map(mID => mID.id===newId ? {...mID, checked: myEvent} : mID))
     }
-    const deleteWholeList = (todolistId: string) => {
-        // setTodolists(todolists.filter(f=>f.id!==todolistId))
-    }
+
+
 
     return (
 
@@ -160,6 +164,7 @@ const App =() => {
                 callBack={AddTodoList}
                 todolistId={todolistID1}
             />
+            {/*убрать колхозную типизацию m*/}
             {todolists.map( (m: any) => {
 
                 let filtredTasks = tasks[m.id]
