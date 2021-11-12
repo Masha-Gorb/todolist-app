@@ -27,7 +27,7 @@ const App =() => {
     // ])
 
     //почему редьюсер пришлось колхозно типизировать? не ясно
-    let [todolists, TodolistDispatch] = useReducer<Reducer<any, any>>(TodolistReducer, [
+    let [todolists, TodolistDispatch] = useReducer(TodolistReducer, [
         {id: todolistID1, title: 'What to learn', filter: 'All'},
         {id: todolistID2, title: 'What to buy', filter: 'All'}
     ])

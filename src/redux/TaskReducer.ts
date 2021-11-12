@@ -4,10 +4,9 @@ import {v1} from "uuid";
 
 export const TodolistReducer = (state: Array<TodolistsType>, action: generalType) => {
 
-    switch (action.a.type) {
+    switch (action.type) {
         case 'ADD-TODOLIST' : {
-            console.log(action.a.todolistId)
-
+            console.log(action.todolistId)
             // let newTodolistID = v1();
             // setTodolists([{id: newTodolistID, title: newTodoListTitle, filter: 'All'}, ...todolists])
             // setTasks({...tasks, [newTodolistID]:[]})
@@ -15,17 +14,14 @@ export const TodolistReducer = (state: Array<TodolistsType>, action: generalType
         }
         case 'DELETE-WHOLE-TODOLIST': {
             // setTodolists(todolists.filter(f=>f.id!==todolistId))
-            return state.filter(f => f.id !== action.b.todolistId)
+            return state.filter(f => f.id !== action.todolistId)
         }
         default:
             return state
     }
 }
 //общий тип для экшон криэйтора
-type generalType = {
-    a: AddTodolistACType,
-    b: DeleteWholeTodolistAC
-}
+type generalType = AddTodolistACType | DeleteWholeTodolistAC
 //автоматическая типизация не функции а объекта внутри нее
 type AddTodolistACType = ReturnType<typeof AddTodolistAC>
 type DeleteWholeTodolistAC = ReturnType<typeof DeleteWholeTodolistAC>
