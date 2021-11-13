@@ -3,7 +3,7 @@ import {tasksPropsType, TodoList} from "./TodoList";
 import {v1} from "uuid";
 import styles from './App.module.css'
 import {AddItemForm} from "./Components/AddItemForm";
-import {AddTodolistAC, DeleteWholeTodolistAC, TodolistReducer} from "./redux/TaskReducer";
+import {AddTodolistAC, DeleteWholeTodolistAC, TodolistReducer} from "./redux/TodolistReducer";
 
 export type TaskType = {
     [key: string] : Array<tasksPropsType>
