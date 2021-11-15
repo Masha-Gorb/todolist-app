@@ -13,7 +13,6 @@ export const TodolistReducer = (state: Array<TodolistsType>, action: generalType
             return state
         }
         case 'DELETE-WHOLE-TODOLIST': {
-            // setTodolists(todolists.filter(f=>f.id!==todolistId))
             return state.filter(f => f.id !== action.todolistId)
         }
         default:

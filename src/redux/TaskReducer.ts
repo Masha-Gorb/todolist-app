@@ -4,6 +4,7 @@ export const TaskReducer = (state: Array<tasksPropsType>, action: GeneralTaskRed
     switch (action.type) {
         case 'DELETE-TASK' : {
             //сюда вставить "тело" функции
+            // setTasks({...tasks, [todolistId]: tasks[todolistId].filter(f=>f.id!==taskId)})
             return state
         }
     }
@@ -14,6 +15,8 @@ type DeleteTaskACType = ReturnType<typeof DeleteTaskAC>
 
 export const DeleteTaskAC = (todolistId: string, taskId: string) => {
     return {
-        type: 'DELETE-TASK'
+        type: 'DELETE-TASK',
+        todolistId,
+        taskId,
     } as const
 }
