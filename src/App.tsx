@@ -4,7 +4,8 @@ import {v1} from "uuid";
 import styles from './App.module.css'
 import {AddItemForm} from "./Components/AddItemForm";
 import {AddTodolistAC, DeleteWholeTodolistAC, TodolistReducer} from "./redux/TodolistReducer";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {rootReducerType} from "./redux/store";
 
 export type TaskType = {
     [key: string] : Array<tasksPropsType>
@@ -29,6 +30,7 @@ const App =() => {
 
     //создаем централизованный диспачт
     let dispatch = useDispatch();
+    let todolists = useSelector<rootReducerType, Array<TodolistsType>>(state => state.todolist)
 
     // let [todolists, TodolistDispatch] = useReducer(TodolistReducer, [
     //     {id: todolistID1, title: 'What to learn', filter: 'All'},
@@ -52,12 +54,14 @@ const App =() => {
     // const AddTodoList = (todolistId: string, newTodoListTitle: string) => {
     const AddTodoList = (todolistId: string, newTodoListTitle: string) => {
         let newTodolistID = v1();
+        dispatch(AddTodolistAC(todolistId, newTodoListTitle))
         // TodolistDispatch(AddTodolistAC(todolistId, newTodoListTitle))
         // setTodolists([{id: newTodolistID, title: newTodoListTitle, filter: 'All'}, ...todolists])
         // setTasks({...tasks, [newTodolistID]:[]})
     }
 
     const deleteWholeList = (todolistId: string) => {
+        dispatch(DeleteWholeTodolistAC(todolistId))
         // TodolistDispatch(DeleteWholeTodolistAC(todolistId))
         // setTodolists(todolists.filter(f=>f.id!==todolistId))
     }
