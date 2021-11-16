@@ -2,7 +2,16 @@ import {tasksPropsType} from "../TodoList";
 import {TodolistsType} from "../App";
 import {v1} from "uuid";
 
-export const TodolistReducer = (state: Array<TodolistsType>, action: generalType) => {
+//не уверена что это надо сюда переносить
+let todolistID1 = v1()
+let todolistID2 = v1()
+
+let initialState: Array<TodolistsType> = [
+    {id: todolistID1, title: 'What to learn', filter: 'All'},
+    {id: todolistID2, title: 'What to buy', filter: 'All'}
+]
+
+export const TodolistReducer = (state = initialState, action: generalType) => {
 
     switch (action.type) {
         case 'ADD-TODOLIST' : {

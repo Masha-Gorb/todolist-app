@@ -4,6 +4,7 @@ import {v1} from "uuid";
 import styles from './App.module.css'
 import {AddItemForm} from "./Components/AddItemForm";
 import {AddTodolistAC, DeleteWholeTodolistAC, TodolistReducer} from "./redux/TodolistReducer";
+import {useDispatch} from "react-redux";
 
 export type TaskType = {
     [key: string] : Array<tasksPropsType>
@@ -26,11 +27,13 @@ const App =() => {
     //     {id: todolistID2, title: 'What to buy', filter: 'All'}
     // ])
 
-    //почему редьюсер пришлось колхозно типизировать? не ясно
-    let [todolists, TodolistDispatch] = useReducer(TodolistReducer, [
-        {id: todolistID1, title: 'What to learn', filter: 'All'},
-        {id: todolistID2, title: 'What to buy', filter: 'All'}
-    ])
+    //создаем централизованный диспачт
+    let dispatch = useDispatch();
+
+    // let [todolists, TodolistDispatch] = useReducer(TodolistReducer, [
+    //     {id: todolistID1, title: 'What to learn', filter: 'All'},
+    //     {id: todolistID2, title: 'What to buy', filter: 'All'}
+    // ])
 
     let [tasks, setTasks] = useState<TaskType>({
         [todolistID1]:[
@@ -49,13 +52,13 @@ const App =() => {
     // const AddTodoList = (todolistId: string, newTodoListTitle: string) => {
     const AddTodoList = (todolistId: string, newTodoListTitle: string) => {
         let newTodolistID = v1();
-        TodolistDispatch(AddTodolistAC(todolistId, newTodoListTitle))
+        // TodolistDispatch(AddTodolistAC(todolistId, newTodoListTitle))
         // setTodolists([{id: newTodolistID, title: newTodoListTitle, filter: 'All'}, ...todolists])
         // setTasks({...tasks, [newTodolistID]:[]})
     }
 
     const deleteWholeList = (todolistId: string) => {
-        TodolistDispatch(DeleteWholeTodolistAC(todolistId))
+        // TodolistDispatch(DeleteWholeTodolistAC(todolistId))
         // setTodolists(todolists.filter(f=>f.id!==todolistId))
     }
 

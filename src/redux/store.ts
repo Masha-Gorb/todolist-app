@@ -14,3 +14,4 @@ export type rootReducerType = ReturnType<typeof rootReducer>
 //создаем объект стор
 //один и тот же экшен можно использовать в разных редьюсерах, не имеет конкретной "прописки"
 export  let store = createStore(rootReducer)
+
