@@ -31,25 +31,26 @@ const App =() => {
     //создаем централизованный диспачт
     let dispatch = useDispatch();
     let todolists = useSelector<rootReducerType, Array<TodolistsType>>(state => state.todolist)
+    let tasks = useSelector<rootReducerType, Array<tasksPropsType>>(state => state.tasks)
 
     // let [todolists, TodolistDispatch] = useReducer(TodolistReducer, [
     //     {id: todolistID1, title: 'What to learn', filter: 'All'},
     //     {id: todolistID2, title: 'What to buy', filter: 'All'}
     // ])
 
-    let [tasks, setTasks] = useState<TaskType>({
-        [todolistID1]:[
-            {id: v1(), title: "react", checked: false},
-            {id: v1(), title: "angular", checked: true},
-            {id: v1(), title: "vue", checked: false},
-        ],
-
-        [todolistID2]:[
-        {id: v1(), title: "Bread", checked: false},
-        {id: v1(), title: "Milk", checked: true},
-        {id: v1(), title: "Oil", checked: false}
-    ]
-    })
+    // let [tasks, setTasks] = useState<TaskType>({
+    //     [todolistID1]:[
+    //         {id: v1(), title: "react", checked: false},
+    //         {id: v1(), title: "angular", checked: true},
+    //         {id: v1(), title: "vue", checked: false},
+    //     ],
+    //
+    //     [todolistID2]:[
+    //     {id: v1(), title: "Bread", checked: false},
+    //     {id: v1(), title: "Milk", checked: true},
+    //     {id: v1(), title: "Oil", checked: false}
+    // ]
+    // })
 
     // const AddTodoList = (todolistId: string, newTodoListTitle: string) => {
     const AddTodoList = (todolistId: string, newTodoListTitle: string) => {
@@ -132,7 +133,8 @@ const App =() => {
     //тестим - заставляем в консоли показать ивент.кюрентТарджет.value
 
     const addTask = (todolistId: string, newTaskTitle: string) => {
-        setTasks({...tasks, [todolistId]: [{id: v1(), title: newTaskTitle.trim(), checked: false}, ...tasks[todolistId]]})
+        // setTasks({...tasks, [todolistId]: [{id: v1(), title: newTaskTitle.trim(), checked: false}, ...tasks[todolistId]]})
+
         // let currentTodolistId = tasks[todolistId]
         // let newTask = {id: v1(), title: newTaskTitle.trim(), checked: false}
         // tasks[todolistId]=[newTask, ...tasks[todolistId]]
@@ -145,15 +147,17 @@ const App =() => {
     const deleteTask = (todolistId: string, taskId: string) => {
         // let currentTodolistId = tasks[todolistId]
         // tasks[todolistId] = currentTodolistId.filter(f=>f.id!==taskId)
-        setTasks({...tasks, [todolistId]: tasks[todolistId].filter(f=>f.id!==taskId)})
+
+        // setTasks({...tasks, [todolistId]: tasks[todolistId].filter(f=>f.id!==taskId)})
     }
     const changeChekBox = (todolistId: string, myEvent: boolean, newId : string) => {
-        let currentTodolistId = tasks[todolistId]
-        let currentTask = tasks[todolistId].find(ft=> ft.id===newId)
-        if(currentTask) {
-            currentTask.checked=myEvent
-                setTasks({...tasks})
-        }
+        // let currentTodolistId = tasks[todolistId]
+        // let currentTask = tasks[todolistId].find(ft=> ft.id===newId)
+        // if(currentTask) {
+        //     currentTask.checked=myEvent
+        //         setTasks({...tasks})
+        // }
+
         // setTasks({...tasks, [todolistId]:tasks[todolistId].find(ft=> ft.id===newId)})
         // let currentTask=tasks.find(ft => ft.id===id)
         // if(currentTask) {

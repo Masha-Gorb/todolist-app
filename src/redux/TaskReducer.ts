@@ -1,6 +1,21 @@
 import {tasksPropsType} from "../TodoList";
+import {v1} from "uuid";
+import {todolistID1, todolistID2} from "./TodolistReducer";
 
-export const TaskReducer = (state: Array<tasksPropsType>, action: GeneralTaskReducerType) => { //прописать типы
+let initialState: Array<tasksPropsType> = {
+    [todolistID1]:[
+        {id: v1(), title: "react", checked: false},
+        {id: v1(), title: "angular", checked: true},
+        {id: v1(), title: "vue", checked: false},
+    ],
+
+    [todolistID2]:[
+        {id: v1(), title: "Bread", checked: false},
+        {id: v1(), title: "Milk", checked: true},
+        {id: v1(), title: "Oil", checked: false}
+    ]
+}
+export const TaskReducer = (state = initialState, action: GeneralTaskReducerType) => { //прописать типы
     switch (action.type) {
         case 'DELETE-TASK' : {
             //сюда вставить "тело" функции

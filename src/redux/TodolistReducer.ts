@@ -3,8 +3,8 @@ import {TodolistsType} from "../App";
 import {v1} from "uuid";
 
 //не уверена что это надо сюда переносить
-let todolistID1 = v1()
-let todolistID2 = v1()
+export let todolistID1 = v1()
+export let todolistID2 = v1()
 
 let initialState: Array<TodolistsType> = [
     {id: todolistID1, title: 'What to learn', filter: 'All'},
