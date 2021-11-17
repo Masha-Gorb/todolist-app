@@ -29,40 +29,40 @@ const App =() => {
     // ])
 
     //создаем централизованный диспачт
-    let dispatch = useDispatch();
-    let todolists = useSelector<rootReducerType, Array<TodolistsType>>(state => state.todolist)
-    let tasks = useSelector<rootReducerType, Array<tasksPropsType>>(state => state.tasks)
+    // let dispatch = useDispatch();
+    // let todolists = useSelector<rootReducerType, Array<TodolistsType>>(state => state.todolist)
+    // let tasks = useSelector<rootReducerType, Array<tasksPropsType>>(state => state.tasks)
 
-    // let [todolists, TodolistDispatch] = useReducer(TodolistReducer, [
-    //     {id: todolistID1, title: 'What to learn', filter: 'All'},
-    //     {id: todolistID2, title: 'What to buy', filter: 'All'}
-    // ])
+    let [todolists, setTodolists] = useReducer(TodolistReducer, [
+        {id: todolistID1, title: 'What to learn', filter: 'All'},
+        {id: todolistID2, title: 'What to buy', filter: 'All'}
+    ])
 
-    // let [tasks, setTasks] = useState<TaskType>({
-    //     [todolistID1]:[
-    //         {id: v1(), title: "react", checked: false},
-    //         {id: v1(), title: "angular", checked: true},
-    //         {id: v1(), title: "vue", checked: false},
-    //     ],
-    //
-    //     [todolistID2]:[
-    //     {id: v1(), title: "Bread", checked: false},
-    //     {id: v1(), title: "Milk", checked: true},
-    //     {id: v1(), title: "Oil", checked: false}
-    // ]
-    // })
+    let [tasks, setTasks] = useState<TaskType>({
+        [todolistID1]:[
+            {id: v1(), title: "react", checked: false},
+            {id: v1(), title: "angular", checked: true},
+            {id: v1(), title: "vue", checked: false},
+        ],
+
+        [todolistID2]:[
+        {id: v1(), title: "Bread", checked: false},
+        {id: v1(), title: "Milk", checked: true},
+        {id: v1(), title: "Oil", checked: false}
+    ]
+    })
 
     // const AddTodoList = (todolistId: string, newTodoListTitle: string) => {
     const AddTodoList = (todolistId: string, newTodoListTitle: string) => {
         let newTodolistID = v1();
-        dispatch(AddTodolistAC(todolistId, newTodoListTitle))
+        // dispatch(AddTodolistAC(todolistId, newTodoListTitle))
         // TodolistDispatch(AddTodolistAC(todolistId, newTodoListTitle))
         // setTodolists([{id: newTodolistID, title: newTodoListTitle, filter: 'All'}, ...todolists])
         // setTasks({...tasks, [newTodolistID]:[]})
     }
 
     const deleteWholeList = (todolistId: string) => {
-        dispatch(DeleteWholeTodolistAC(todolistId))
+        // dispatch(DeleteWholeTodolistAC(todolistId))
         // TodolistDispatch(DeleteWholeTodolistAC(todolistId))
         // setTodolists(todolists.filter(f=>f.id!==todolistId))
     }
