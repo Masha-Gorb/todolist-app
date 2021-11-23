@@ -28,26 +28,26 @@ type propsType = {
 
 export const TodoList = (props: propsType) => {
 
-    // let [newTaskTitle, setNewTaskTitle] = useState('')
-    // let [error, setError] = useState(true)
+    let [newTaskTitle, setNewTaskTitle] = useState('')
+    let [error, setError] = useState(true)
 
     // const addTaskHandler = () => {
     //     props.addTask(props.todolistId, newTaskTitle)
     //     setNewTaskTitle('')
     //     setError(false)
     // }
-    // const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    //     setError(false)
-    //     setNewTaskTitle(event.currentTarget.value)
-    // }
+    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setError(false)
+        setNewTaskTitle(event.currentTarget.value)
+    }
 
-    // const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-    //     if (event.key === 'Enter') {
-    //         props.addTask(props.todolistId, newTaskTitle)
-    //         setNewTaskTitle('')
-    //         setError(false)
-    //     }
-    // }
+    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            props.addTask(props.todolistId, newTaskTitle)
+            setNewTaskTitle('')
+            setError(false)
+        }
+    }
 
     const changeFilterOptimusHandler = (filterValue: filterType, todolistId: string) => {
         props.changeFilter(filterValue, todolistId)
