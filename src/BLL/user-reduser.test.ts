@@ -1,15 +1,11 @@
-import {userReducer} from './user-reduser';
+import {sum} from "./user-reduser";
 
-test('user reducer should increment only age', () => {
-    const startState = { age: 20, childrenCount: 2, name: 'Dimych' };
-
-    const endState = userReducer(startState, { type: 'INCREMENT-AGE' })
-
-    expect(endState.age).toBe(21);
-    expect(endState.childrenCount).toBe(2);
-});
-
-test('user reducer should increment only childrenCount', () => {
-    const startState = { age: 20, childrenCount: 2, name: 'Dimych' };
-    // your code here
-});
+test('sum should be correct', () => {
+    //тестовые данные
+    let num1 = 10;
+    let num2 = 34;
+    // выполнение тестируемого кода
+    const result = sum(num1,num2);
+    //сравнение с ожидаемым результатом
+    expect(result).toBe(44);
+})

@@ -3,6 +3,7 @@
 }
 .todolists {
     display: flex;
+    margin-left: 20pt;
 }
 
 .errorMessage {
