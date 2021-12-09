@@ -4,6 +4,7 @@ import {v1} from "uuid";
 import {NewInput} from "./Components/NewInput";
 import {inspect} from "util";
 import styles from './App.module.css'
+import {UserMoney, UserWallet} from "./wallet";
 export type filterType = "All" | "Active" | "Completed"
 export type TodolistsType = {
     id: string
@@ -162,8 +163,11 @@ const App =() => {
                     filter={m.filter}
                     // setTasks={setTasks}
                 />
+
             )
         })}
+
+
 
 
 
