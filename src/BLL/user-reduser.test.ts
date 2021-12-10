@@ -10,7 +10,7 @@ test.skip('sum should be correct', () => {
     expect(result).toBe(44);
 })
 
-test ('calculator should work', () => {
+test.skip ('calculator should work', () => {
     //тестовые данные
     let num1 = 10;
     let num2 = 5;
