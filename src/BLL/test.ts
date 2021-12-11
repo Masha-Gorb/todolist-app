@@ -12,6 +12,17 @@ export function sum(...nums: Array<any>): number {
 // 01 если равнобедренный
 // 11 если обычный
 // 00 если не существует
+export function getTrialgleType(a: number, b: number, c: number) {
+    if (a === b && b === c) {
+        return "10"
+    } else if (a === b || b === c) {
+        return "01"
+    } else if (a !== b && b !== c && c !== a) {
+        return '11'
+    } else {
+        return '00'
+    }
+};
 
 //3. ф-ция getSum принимает параметром целое число и возвращает сумму цифр этого числа
 
