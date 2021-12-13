@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
-import {filterType} from "./App";
+import {filterType, TodolistsType} from "./App";
 import {ButtonUniversal} from "./Components/ButtonUniversal";
 import styles from './App.module.css'
 
@@ -9,7 +9,7 @@ type tasksPropsType = {
     checked: boolean
 }
 
-type propsType = {
+export type propsType = {
     //title=!string — значит что тайтл может прийти а может не прийти в компоненту
     todolistId: string
     title: string
@@ -19,6 +19,7 @@ type propsType = {
     addTask: (todolistId: string, newTaskTitle: string) => void
     changeChekBox: (todolistId: string, myEvent: boolean, newId: string) => void
     filter: filterType
+    removeTodolist: (todolistId: string)=> void
     // setTasks: (tasks: Array<tasksPropsType>) => void
 }
 
@@ -78,9 +79,14 @@ export const TodoList = (props: propsType) => {
         // console.log(event.currentTarget.checked)
         props.changeChekBox(props.todolistId, event.currentTarget.checked, newId)
     }
+
+    const removeTodolistHandler = () => {
+        props.removeTodolist(props.todolistId)
+    }
     return (
         <div>
             <h2>{props.title}</h2>
+            <button onClick={removeTodolistHandler}>x</button>
 
             <input className={error ? styles.error : ''} value={newTaskTitle} onChange={onChangeHandler}
                    onKeyPress={onKeyPressHandler}/>

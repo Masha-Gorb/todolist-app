@@ -42,6 +42,13 @@ const App =() => {
     ]
     })
 
+    const removeTodolist = (todolistId: string) => {
+        console.log(todolistId)
+        let currentTodolistId = todolists
+        todolists = currentTodolistId.filter(f=>f.id!==todolistId)
+        setTodolists({...todolists})
+    }
+
     // let [tasks, setTasks] = useState([
     //     {id: v1(), title: "Bread", checked: true},
     //     {id: v1(), title: "Milk", checked: true},
@@ -106,7 +113,6 @@ const App =() => {
     //у инпута создаем онЧендж - учим инпут ловить вносимое значение
     //онЧендж выносим в онЧенджХандлер - в него приходит ивент, который надо протипизировать(реакт сам подскажет)
     //тестим - заставляем в консоли показать ивент.кюрентТарджет.value
-
     const addTask = (todolistId: string, newTaskTitle: string) => {
         let currentTodolistId = tasks[todolistId]
         let newTask = {id: v1(), title: newTaskTitle.trim(), checked: false}
@@ -117,13 +123,11 @@ const App =() => {
         //     setTasks([newTask, ...tasks])
         // }
     }
-
     const deleteTask = (todolistId: string, taskId: string) => {
         let currentTodolistId = tasks[todolistId]
         tasks[todolistId] = currentTodolistId.filter(f=>f.id!==taskId)
         setTasks({...tasks})
     }
-
     const changeChekBox = (todolistId: string, myEvent: boolean, newId : string) => {
         let currentTodolistId = tasks[todolistId]
         let currentTask = tasks[todolistId].find(ft=> ft.id===newId)
@@ -161,6 +165,7 @@ const App =() => {
                     addTask={addTask}
                     changeChekBox={changeChekBox}
                     filter={m.filter}
+                    removeTodolist={removeTodolist}
                     // setTasks={setTasks}
                 />
 
