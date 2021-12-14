@@ -2,6 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
 import {filterType, TodolistsType} from "./App";
 import {ButtonUniversal} from "./Components/ButtonUniversal";
 import styles from './App.module.css'
+import AddItemForm from "./AddItemForm";
 
 type tasksPropsType = {
     id: string
@@ -90,8 +91,6 @@ export const TodoList = (props: propsType) => {
 
             <input className={error ? styles.error : ''} value={newTaskTitle} onChange={onChangeHandler}
                    onKeyPress={onKeyPressHandler}/>
-
-
             <button onClick={addTaskHandler}>+</button>
             {error && <div className={styles.errorMessage}>Title is required</div>}
 
@@ -100,6 +99,7 @@ export const TodoList = (props: propsType) => {
                     {props.tasks.map(m => {
                             return (
                                 <li key={m.id}>
+
                                     <ButtonUniversal filter={props.filter} title={"x"}
                                                      callBack={() => deleteTaskHandler(m.id)}/>
                                     {/*<button onClick={ () => onChangeDeleteTaskHandler(m.id)}>x</button>*/}
