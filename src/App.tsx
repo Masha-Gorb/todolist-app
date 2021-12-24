@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React, {useReducer, useState} from 'react'
 import {TodoList} from "./TodoList";
 import {v1} from "uuid";
 import styles from './App.module.css'
 import AddItemForm from "./AddItemForm";
+import {removeTodolistAC, TodolistReducer} from "./reducers/TodolistReducer";
 
 export type filterType = "All" | "Active" | "Completed"
 export type TodolistsType = {
@@ -17,7 +18,7 @@ const App =() => {
     let todolistID2=v1()
     let todolistID3=v1()
 
-    let [todolists, setTodolists] = useState<Array<TodolistsType>>( [
+    let [todolists, setTodolist] = useState([
         {id: todolistID1, title: 'What to learn', filter: 'All'},
         {id: todolistID2, title: 'What to buy', filter: 'All'}
     ])
@@ -42,18 +43,19 @@ const App =() => {
     ]
     })
 
-    const removeTodolist = (todolistId: string) => {
-        setTodolists(todolists.filter(t => t.id !== todolistId))
+    const removeTodolist = (id: string) => {
+        // todolistsDispatch(removeTodolistodolistAC());
+        // setTodolists(todolists.filter(t => t.id !== todolistId))
     }
 
     const addTodolist = (title: string) => {
-        let newTodolistID = v1()
-        let newTodolist : TodolistsType = {id: newTodolistID, title: title, filter: 'All'}
-        setTodolists([newTodolist, ...todolists])
-        setTasks({
-            ...tasks,
-            [newTodolistID] : []
-        })
+        // let newTodolistID = v1()
+        // let newTodolist : TodolistsType = {id: newTodolistID, title: title, filter: 'All'}
+        // setTodolists([newTodolist, ...todolists])
+        // setTasks({
+        //     ...tasks,
+        //     [newTodolistID] : []
+        // })
     }
 
     // let [tasks, setTasks] = useState([
@@ -174,7 +176,7 @@ const App =() => {
                     changeFilter={changeFilter}
                     addTask={addTask}
                     changeChekBox={changeChekBox}
-                    filter={m.filter}
+                    // filter={m.filter}
                     removeTodolist={removeTodolist}
                     // setTasks={setTasks}
                 />

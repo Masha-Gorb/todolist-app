@@ -11,6 +11,7 @@ import {propsType} from "../TodoList";
 export const TodolistReducer = (state: Array<propsType>, action: generalType) => {
     switch (action.type) {
         case 'REMOVE-TODOLIST' : {
+            console.log('jjjj')
             return state
         }
         default: return state
@@ -26,8 +27,9 @@ type generalType = RemoveTodolistACType
 // ACTION CREATOR это функция которая возвращает объект (экшон - это объект)
 //type это тот необходимый ключ, без которого редьюсер не имеет смысла
 //type обяз прописываем as const чтобы автоматическая типизация не брала его стрингой
-export const removeTodolistAC = () => {
+export const removeTodolistAC = (todolistID: string) => {
     return {
-        type: 'REMOVE-TODOLIST'
+        type: 'REMOVE-TODOLIST',
+        todolistID: todolistID
     } as const
 }
