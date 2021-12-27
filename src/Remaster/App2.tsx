@@ -37,8 +37,18 @@ export const App2 = () => {
     });
 
     const removeTodolist2 = (_id:string) => {
-        console.log(_id)
         setTodolists2(todolists2.filter(f=> f._id !== _id))
+    }
+    const addTodolist2 = () => {
+        console.log('hey')
+    }
+
+    const removeTask = (_id: string, taskID: string) => {
+        console.log('here will be remove task')
+        let todolistTasks = tasks2[_id]
+        tasks2[_id] = todolistTasks.filter(f => f.taskID !== taskID)
+        setTasks2({...tasks2})
+
     }
 
 
@@ -52,6 +62,8 @@ export const App2 = () => {
                 title={m.title}
                 tasks={tasksForTodolist2}
                 removeTodolist={removeTodolist2}
+                addTodolist={addTodolist2}
+                removeTask={removeTask}
                 />
 
             })}
