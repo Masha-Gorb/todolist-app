@@ -19,7 +19,7 @@ export type propsType = {
     changeFilter: (filterValue: filterType, todolistId: string) => void
     addTask: (todolistId: string, newTaskTitle: string) => void
     changeChekBox: (todolistId: string, myEvent: boolean, newId: string) => void
-    filter: filterType
+    // filter: filterType
     removeTodolist: (todolistId: string)=> void
     // setTasks: (tasks: Array<tasksPropsType>) => void
 }
@@ -100,8 +100,8 @@ export const TodoList = (props: propsType) => {
                             return (
                                 <li key={m.id}>
 
-                                    <ButtonUniversal filter={props.filter} title={"x"}
-                                                     callBack={() => deleteTaskHandler(m.id)}/>
+                                    {/*<ButtonUniversal filter={props.filter} title={"x"}*/}
+                                    {/*                 callBack={() => deleteTaskHandler(m.id)}/>*/}
                                     {/*<button onClick={ () => onChangeDeleteTaskHandler(m.id)}>x</button>*/}
                                     <input type="checkbox" onChange={(event) => onChangeCheckBoxHandler(event, m.id)}
                                            checked={m.checked}/>
@@ -114,11 +114,11 @@ export const TodoList = (props: propsType) => {
             </div>
 
 
-            <ButtonUniversal filter={props.filter} title={'All'} callBack={() => changeFilterOptimusHandler('All', props.todolistId)}/>
-            <ButtonUniversal filter={props.filter} title={'Active'}
-                             callBack={() => changeFilterOptimusHandler('Active', props.todolistId)}/>
-            <ButtonUniversal filter={props.filter} title={'Completed'}
-                             callBack={() => changeFilterOptimusHandler('Completed', props.todolistId)}/>
+            {/*<ButtonUniversal filter={props.filter} title={'All'} callBack={() => changeFilterOptimusHandler('All', props.todolistId)}/>*/}
+            {/*<ButtonUniversal filter={props.filter} title={'Active'}*/}
+            {/*                 callBack={() => changeFilterOptimusHandler('Active', props.todolistId)}/>*/}
+            {/*<ButtonUniversal filter={props.filter} title={'Completed'}*/}
+            {/*                 callBack={() => changeFilterOptimusHandler('Completed', props.todolistId)}/>*/}
 
             {/*<ButtonUniversal title={'All'} callBack={changeAllFilterHandler} />*/}
             {/*<ButtonUniversal title={'Active'} callBack={changeActiveFilterHandler} />*/}

@@ -16,7 +16,6 @@ const App =() => {
 
     let todolistID1=v1()
     let todolistID2=v1()
-    let todolistID3=v1()
 
     let [todolists, setTodolist] = useState([
         {id: todolistID1, title: 'What to learn', filter: 'All'},
@@ -44,18 +43,17 @@ const App =() => {
     })
 
     const removeTodolist = (id: string) => {
-        // todolistsDispatch(removeTodolistodolistAC());
-        // setTodolists(todolists.filter(t => t.id !== todolistId))
+        setTodolist(todolists.filter(t => t.id !== id))
     }
 
     const addTodolist = (title: string) => {
-        // let newTodolistID = v1()
-        // let newTodolist : TodolistsType = {id: newTodolistID, title: title, filter: 'All'}
-        // setTodolists([newTodolist, ...todolists])
-        // setTasks({
-        //     ...tasks,
-        //     [newTodolistID] : []
-        // })
+        let newTodolistID = v1()
+        let newTodolist : TodolistsType = {id: newTodolistID, title: title, filter: 'All'}
+        setTodolist([newTodolist, ...todolists])
+        setTasks({
+            ...tasks,
+            [newTodolistID] : []
+        })
     }
 
     // let [tasks, setTasks] = useState([
@@ -97,11 +95,10 @@ const App =() => {
 
     const changeFilter = (filterValue: filterType,todolistId: string) => {
         // setFilter(filterValue)
-        console.log(todolistId)
         let currentTodolist = todolists.find(f=> f.id===todolistId)
         if(currentTodolist) {
             currentTodolist.filter=filterValue
-            setTodolists([...todolists])
+            setTodolist([...todolists])
         }
     }
 
@@ -123,27 +120,32 @@ const App =() => {
     //онЧендж выносим в онЧенджХандлер - в него приходит ивент, который надо протипизировать(реакт сам подскажет)
     //тестим - заставляем в консоли показать ивент.кюрентТарджет.value
     const addTask = (todolistId: string, newTaskTitle: string) => {
-        let currentTodolistId = tasks[todolistId]
-        let newTask = {id: v1(), title: newTaskTitle.trim(), checked: false}
-        tasks[todolistId]=[newTask, ...tasks[todolistId]]
-        setTasks({...tasks})
-        // if(newTaskTitle.trim()!=="") {
-        //     let newTask = {id: v1(), title: newTaskTitle.trim(), checked: true}
-        //     setTasks([newTask, ...tasks])
-        // }
+        // let currentTodolistId = tasks[todolistId]
+        // let newTask = {id: v1(), title: newTaskTitle.trim(), checked: false}
+        // tasks[todolistId]=[newTask, ...tasks[todolistId]]
+        // setTasks({...tasks})
+        // // if(newTaskTitle.trim()!=="") {
+        // //     let newTask = {id: v1(), title: newTaskTitle.trim(), checked: true}
+        // //     setTasks([newTask, ...tasks])
+        // // }
+
+        setTasks({...tasks, [todolistId]: [{id: v1(), title: newTaskTitle.trim(), checked: false}, ...tasks[todolistId]]})
     }
     const deleteTask = (todolistId: string, taskId: string) => {
-        let currentTodolistId = tasks[todolistId]
-        tasks[todolistId] = currentTodolistId.filter(f=>f.id!==taskId)
-        setTasks({...tasks})
+        // let currentTodolistId = tasks[todolistId]
+        // tasks[todolistId] = currentTodolistId.filter(f=>f.id!==taskId)
+        // setTasks({...tasks})
+
+        setTasks({...tasks, [todolistId]: tasks[todolistId].filter(f=>f.id!==taskId)})
+
     }
     const changeChekBox = (todolistId: string, myEvent: boolean, newId : string) => {
         let currentTodolistId = tasks[todolistId]
-        let currentTask = tasks[todolistId].find(ft=> ft.id===newId)
-        if(currentTask) {
-            currentTask.checked=myEvent
-                setTasks({...tasks})
-        }
+        // let currentTask = tasks[todolistId].find(ft=> ft.id===newId)
+        // // if(currentTask) {
+        // //     currentTask.checked=myEvent
+        // //         setTasks({...tasks})
+        // // }
 
         // let currentTask=tasks.find(ft => ft.id===id)
         // if(currentTask) {
@@ -159,6 +161,7 @@ const App =() => {
         {todolists.map( (m) => {
 
             let filtredTasks = tasks[m.id]
+
             if (m.filter === "Active") {
                 filtredTasks = tasks[m.id].filter(f =>!f.checked)
             }
