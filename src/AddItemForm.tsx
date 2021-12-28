@@ -14,7 +14,10 @@ const AddItemForm = (props:  AddItemFormPropsType) => {
         setTitle(e.currentTarget.value)
         setError(false)
     }
-    const onKeyHandler = (e: KeyboardEvent<HTMLInputElement>) => {if (e.key === "Enter") addItem()}
+    const onKeyHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter")
+            addItem()
+    }
     const addItem = () => {
         const trimmedTitle = title.trim()
         if(trimmedTitle){
