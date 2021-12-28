@@ -15,7 +15,7 @@ export type TodolistPropsType = {
     tasks: Array<TasksPropsType>
     removeTask: (id: string) => void
     changeIsDone:() => void
-    addTask:() => void
+    addTask:(title: string) => void
 }
 
 export const App3 = () => {
@@ -35,8 +35,10 @@ const removeTask = (id: string) => {
     console.log('here will be change is done function')
  }
 
- const addTask = () => {
+ const addTask = (title: string) => {
     console.log('here will be add task function')
+     let newTask = {id: v1(), title: title, isDone: false}
+     setTasks([newTask, ...tasks])
  }
 
     return (
