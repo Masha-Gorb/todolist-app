@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 export type PropsType = {
-    callback: () => void
+    callback: (title: string) => void
 }
 
 export const AddItemForm3 = (props: PropsType) => {
@@ -10,7 +10,7 @@ export const AddItemForm3 = (props: PropsType) => {
     return (
         <div>
             <input value={title} onChange={(e) => {setTitle(e.currentTarget.value)}}/>
-            <button onClick={() => props.callback()}>+</button>
+            <button onClick={() => props.callback(title)}>+</button>
         </div>
     )
 }
