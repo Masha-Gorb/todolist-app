@@ -1,4 +1,5 @@
 import {TasksPropsType} from "../App3";
+import {v1} from "uuid";
 
 //Редьюсер - функция которая принимает всегда стейт и экшон
 //Внутри свич кейсы
@@ -8,10 +9,11 @@ import {TasksPropsType} from "../App3";
 export const TaskReducer = (state: Array<TasksPropsType>, action: GeneralType) => {
     switch(action.type) {
         case "REMOVE-TASK": {
-            console.log('dispatch call')
-            //let filtredTask = tasks.filter(f => f.id !== id)
            const newState = [...state]
             return newState.filter(f => f.id !== action.id)
+        }
+        case "ADD-TASK" : {
+            return ([{id: v1(), title: action.title, isDone: false}, ...state])
         }
         default : return state
     }
@@ -21,10 +23,18 @@ export const TaskReducer = (state: Array<TasksPropsType>, action: GeneralType) =
 //в каждом экшонкриейтере ВСЕГДА ПИСАТЬ as const (чтобы не строка, а КОНКРЕТНАЯ строка)
 //потом создаем общий тип, куда через | добавлять разные типы
 type removeTaskACType = ReturnType<typeof removeTaskAC>
-type GeneralType = removeTaskACType
+type addTaskACType = ReturnType<typeof addTaskAC>
+type GeneralType = removeTaskACType | addTaskACType
 export const removeTaskAC = (id: string) => {
     return {
         type: "REMOVE-TASK",
         id: id
+    } as const
+}
+
+export const addTaskAC = (title: string) => {
+    return {
+        type: "ADD-TASK",
+        title: title
     } as const
 }

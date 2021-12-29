@@ -1,7 +1,7 @@
 import React, {useReducer, useState} from 'react';
 import {Todolist3} from "./Todolist3";
 import {v1} from "uuid";
-import {removeTaskAC, TaskReducer} from "./redux/TaskReducer";
+import {addTaskAC, removeTaskAC, TaskReducer} from "./redux/TaskReducer";
 
 export type TasksPropsType = {
     id: string
@@ -35,7 +35,6 @@ export const App3 = () => {
     ]);
 
 const removeTask = (id: string) => {
-        console.log('here will be remove task')
         // setTasks(tasks.filter(f => f.id !== id))
     taskDispatch(removeTaskAC(id))
     }
@@ -45,9 +44,9 @@ const removeTask = (id: string) => {
  }
 
  const addTask = (title: string) => {
-    console.log('here will be add task function')
      // let newTask = {id: v1(), title: title, isDone: false}
      // setTasks([newTask, ...tasks])
+     taskDispatch(addTaskAC(title))
  }
 
     return (
