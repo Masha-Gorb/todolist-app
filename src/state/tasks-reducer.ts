@@ -17,20 +17,25 @@ import {v1} from "uuid";
 //экшон и его свойства как то что приходит извне
 //как в экшон криэйтор попадает айдишка - загадка
 
-type ActionType = removeTaskACType
+type ActionType = removeTaskACType | AddTaskACType
 
 export const tasksReducer = (state: TasksStateType, action: ActionType) : TasksStateType => {
     switch(action.type) {
         case 'REMOVE-TASK': {
             return {...state, [action.todolistID] : state[action.todolistID].filter(task => task.id !== action.taskID )}
         }
+        case 'ADD-TASK' : {
+            let task = {id: v1(), title: action.title, isDone: false};
+            let todolistTasks = state[action.todolistID];
+            state[action.todolistID] = [task, ...todolistTasks]
+            return {task:state[action.todolistID], ...state}
+        }
         default: return state
     }
 }
 
 type removeTaskACType = ReturnType<typeof removeTaskAC>
-// type secondACType = ReturnType<typeof secondAc>
-
+type AddTaskACType = ReturnType<typeof addTaskAC>
 export const removeTaskAC = (taskID: string, todolistID: string) => {
     return {
         type: 'REMOVE-TASK',
@@ -39,8 +44,10 @@ export const removeTaskAC = (taskID: string, todolistID: string) => {
     } as const
 }
 
-// export const secondAc = () => {
-//     return {
-//         type: '',
-//     } as const
-// }
+export const addTaskAC = (title: string, todolistID: string) => {
+    return {
+        type: 'ADD-TASK',
+        title,
+        todolistID
+    } as const
+}
