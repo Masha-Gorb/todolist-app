@@ -17,7 +17,7 @@ import {v1} from "uuid";
 //экшон и его свойства как то что приходит извне
 //как в экшон криэйтор попадает айдишка - загадка
 
-type ActionType = removeTaskACType | AddTaskACType
+type ActionType = removeTaskACType | AddTaskACType | changeTaskStatusACtype
 
 export const tasksReducer = (state: TasksStateType, action: ActionType) : TasksStateType => {
     switch(action.type) {
@@ -30,12 +30,30 @@ export const tasksReducer = (state: TasksStateType, action: ActionType) : TasksS
             state[action.todolistID] = [task, ...todolistTasks]
             return {task:state[action.todolistID], ...state}
         }
+        case 'CHANGE-TASK-STATUS' : {
+            // //достанем нужный массив по todolistId:
+            // let todolistTasks = tasks[todolistId];
+            // // найдём нужную таску:
+            // let task = todolistTasks.find(t => t.id === id);
+            // //изменим таску, если она нашлась
+            // if (task) {
+            //     task.isDone = isDone;
+            //     // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
+            //     setTasks({...tasks});
+            let todoListsTasks = state[action.todolistID];
+            let task = todoListsTasks.find(t => t.id === action.id)
+            if (task) {
+                task.isDone = action.isDone
+            }
+            return {task:state[action.todolistID], ...state}
+        }
         default: return state
     }
 }
 
 type removeTaskACType = ReturnType<typeof removeTaskAC>
 type AddTaskACType = ReturnType<typeof addTaskAC>
+type changeTaskStatusACtype = ReturnType<typeof changeTaskStatusAC>
 export const removeTaskAC = (taskID: string, todolistID: string) => {
     return {
         type: 'REMOVE-TASK',
@@ -48,6 +66,15 @@ export const addTaskAC = (title: string, todolistID: string) => {
     return {
         type: 'ADD-TASK',
         title,
+        todolistID
+    } as const
+}
+
+export const changeTaskStatusAC = (id: string, isDone: boolean, todolistID: string) => {
+    return {
+        type: 'CHANGE-TASK-STATUS',
+        id,
+        isDone,
         todolistID
     } as const
 }
