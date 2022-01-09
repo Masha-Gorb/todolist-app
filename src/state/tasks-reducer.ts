@@ -17,7 +17,7 @@ import {v1} from "uuid";
 //экшон и его свойства как то что приходит извне
 //как в экшон криэйтор попадает айдишка - загадка
 
-type ActionType = removeTaskACType | AddTaskACType | changeTaskStatusACtype
+type ActionType = removeTaskACType | AddTaskACType | changeTaskStatusACType | changeTaskTitleACType
 
 export const tasksReducer = (state: TasksStateType, action: ActionType) : TasksStateType => {
     switch(action.type) {
@@ -31,15 +31,6 @@ export const tasksReducer = (state: TasksStateType, action: ActionType) : TasksS
             return {task:state[action.todolistID], ...state}
         }
         case 'CHANGE-TASK-STATUS' : {
-            // //достанем нужный массив по todolistId:
-            // let todolistTasks = tasks[todolistId];
-            // // найдём нужную таску:
-            // let task = todolistTasks.find(t => t.id === id);
-            // //изменим таску, если она нашлась
-            // if (task) {
-            //     task.isDone = isDone;
-            //     // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
-            //     setTasks({...tasks});
             let todoListsTasks = state[action.todolistID];
             let task = todoListsTasks.find(t => t.id === action.id)
             if (task) {
@@ -47,13 +38,24 @@ export const tasksReducer = (state: TasksStateType, action: ActionType) : TasksS
             }
             return {task:state[action.todolistID], ...state}
         }
+        case 'CHANGE-TASK-TITLE' : {
+            let todoListsTasks = state[action.todolistID];
+            let task = todoListsTasks.find(t => t.id === action.id)
+            if (task) {
+                task.title = action.newTitle;
+            }
+            return {task:state[action.todolistID], ...state}
+
+        }
         default: return state
     }
 }
 
 type removeTaskACType = ReturnType<typeof removeTaskAC>
 type AddTaskACType = ReturnType<typeof addTaskAC>
-type changeTaskStatusACtype = ReturnType<typeof changeTaskStatusAC>
+type changeTaskStatusACType = ReturnType<typeof changeTaskStatusAC>
+type changeTaskTitleACType = ReturnType<typeof changeTaskTitleAC>
+
 export const removeTaskAC = (taskID: string, todolistID: string) => {
     return {
         type: 'REMOVE-TASK',
@@ -75,6 +77,15 @@ export const changeTaskStatusAC = (id: string, isDone: boolean, todolistID: stri
         type: 'CHANGE-TASK-STATUS',
         id,
         isDone,
+        todolistID
+    } as const
+}
+
+export const changeTaskTitleAC = (id: string, newTitle: string, todolistID: string) => {
+    return {
+        type: 'CHANGE-TASK-TITLE',
+        id,
+        newTitle,
         todolistID
     } as const
 }
