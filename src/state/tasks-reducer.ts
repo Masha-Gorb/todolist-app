@@ -1,5 +1,6 @@
 import {FilterValuesType, TasksStateType, TodolistType} from "../App";
 import {v1} from "uuid";
+import {addTodolistACType} from "./todolists-reducer";
 //создаем функцию тудулист редьюсер - принимает стейт и экшон. типы пока пишем any
 //хардкодим кейс и дефолтный ретурн
 //перекидываем функционал кек функции removeTodolist
@@ -16,14 +17,20 @@ import {v1} from "uuid";
 //стейт теперь = массив с данными
 //экшон и его свойства как то что приходит извне
 //как в экшон криэйтор попадает айдишка - загадка
+//
 
-type ActionType = removeTaskACType | AddTaskACType | changeTaskStatusACType | changeTaskTitleACType
+type ActionType = removeTaskACType
+    | AddTaskACType
+    | changeTaskStatusACType
+    | changeTaskTitleACType
+    | addTodolistACType
 
 export const tasksReducer = (state: TasksStateType, action: ActionType) : TasksStateType => {
     switch(action.type) {
         case 'REMOVE-TASK': {
             return {...state, [action.todolistID] : state[action.todolistID].filter(task => task.id !== action.taskID )}
         }
+        //рубрика рефактор: переписать в кейсах после ретурна на map + тернарник
         case 'ADD-TASK' : {
             let task = {id: v1(), title: action.title, isDone: false};
             let todolistTasks = state[action.todolistID];
@@ -45,7 +52,11 @@ export const tasksReducer = (state: TasksStateType, action: ActionType) : TasksS
                 task.title = action.newTitle;
             }
             return {task:state[action.todolistID], ...state}
-
+        }
+        case 'ADD-TODOLIST' : {
+            return {
+                ...state,
+            [action.todolistID]:[] }
         }
         default: return state
     }
@@ -63,7 +74,6 @@ export const removeTaskAC = (taskID: string, todolistID: string) => {
         todolistID
     } as const
 }
-
 export const addTaskAC = (title: string, todolistID: string) => {
     return {
         type: 'ADD-TASK',
@@ -71,7 +81,6 @@ export const addTaskAC = (title: string, todolistID: string) => {
         todolistID
     } as const
 }
-
 export const changeTaskStatusAC = (id: string, isDone: boolean, todolistID: string) => {
     return {
         type: 'CHANGE-TASK-STATUS',
@@ -80,7 +89,6 @@ export const changeTaskStatusAC = (id: string, isDone: boolean, todolistID: stri
         todolistID
     } as const
 }
-
 export const changeTaskTitleAC = (id: string, newTitle: string, todolistID: string) => {
     return {
         type: 'CHANGE-TASK-TITLE',
@@ -89,3 +97,4 @@ export const changeTaskTitleAC = (id: string, newTitle: string, todolistID: stri
         todolistID
     } as const
 }
+
