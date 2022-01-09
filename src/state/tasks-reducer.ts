@@ -1,6 +1,6 @@
 import {FilterValuesType, TasksStateType, TodolistType} from "../App";
 import {v1} from "uuid";
-import {addTodolistACType} from "./todolists-reducer";
+import {addTodolistACType, removeTodolistACType} from "./todolists-reducer";
 //создаем функцию тудулист редьюсер - принимает стейт и экшон. типы пока пишем any
 //хардкодим кейс и дефолтный ретурн
 //перекидываем функционал кек функции removeTodolist
@@ -24,6 +24,7 @@ type ActionType = removeTaskACType
     | changeTaskStatusACType
     | changeTaskTitleACType
     | addTodolistACType
+    | removeTodolistACType
 
 export const tasksReducer = (state: TasksStateType, action: ActionType) : TasksStateType => {
     switch(action.type) {
@@ -57,6 +58,11 @@ export const tasksReducer = (state: TasksStateType, action: ActionType) : TasksS
             return {
                 ...state,
             [action.todolistID]:[] }
+        }
+        case 'REMOVE-TODOLIST' : {
+            let newState = {...state};
+            delete newState[action.id]
+            return newState
         }
         default: return state
     }
