@@ -18,8 +18,8 @@ import {v1} from "uuid";
 //как в экшон криэйтор попадает айдишка - загадка
 
 type ActionType = removeTodolistACType | addTodolistACType | changeTodolistTitleACType | changeTodolistFilterACType
-
-export const todolistsReducer = (state: Array<TodolistType>, action: ActionType) : Array<TodolistType> => {
+const initialState:  Array<TodolistType> = []
+export const todolistsReducer = (state: Array<TodolistType> = initialState, action: ActionType) : Array<TodolistType> => {
     switch(action.type) {
         case 'REMOVE-TODOLIST': {
             // setTodolists(todolists.filter(tl => tl.id != id));
