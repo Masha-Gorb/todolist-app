@@ -19,21 +19,21 @@ import {v1} from "uuid";
 
 type ActionType = removeTodolistACType | addTodolistACType | changeTodolistTitleACType | changeTodolistFilterACType
 
-export const todolistsReducer = (state: Array<TodolistType>, action: ActionType) => {
+export const todolistsReducer = (state: Array<TodolistType>, action: ActionType) : Array<TodolistType> => {
     switch(action.type) {
         case 'REMOVE-TODOLIST': {
             // setTodolists(todolists.filter(tl => tl.id != id));
             return state.filter(f => f.id !== action.id)
         }
         case 'ADD-TODOLIST': {
-            let newTodolistId = v1();
+            // let newTodolistId = v1();
             // let newTodolist: TodolistType = {id: newTodolistId, title: title, filter: 'all'};
             // setTodolists([newTodolist, ...todolists]);
             // setTasks({
             //     ...tasks,
             //     [newTodolistId]: []
             // })
-            return [... state, {id: action.todolistID, title: action.title, filter: "all"}]
+            return [...state, {id: action.todolistID, title: action.title, filter: "all"}]
         }
         case 'CHANGE-TODOLIST-TITLE' : {
             return state.map(m => m.id === action.id ? {...m, title: action.title} : m)

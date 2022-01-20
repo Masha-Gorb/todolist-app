@@ -9,6 +9,7 @@ import {TasksStateType} from '../App';
 import {addTodolistAC, removeTodolistAC} from "./todolists-reducer";
 
 let startState: TasksStateType;
+
 beforeEach(() => {
     startState = {
         "todolistId1": [
