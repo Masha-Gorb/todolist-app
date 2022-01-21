@@ -4,7 +4,7 @@ type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
 
-export function AddItemForm(props: AddItemFormPropsType) {
+export const AddItemForm = React.memo ((props: AddItemFormPropsType) =>  {
     console.log('Add Item form component')
 
     let [title, setTitle] = useState("")
@@ -42,4 +42,4 @@ export function AddItemForm(props: AddItemFormPropsType) {
 
         {error && <div className="error-message">{error}</div>}
     </div>
-}
+} )
