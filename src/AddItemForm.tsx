@@ -4,6 +4,11 @@ type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
 
+//обернули компоненту ХОКом Реакт.мемо
+//обращаем внимание на то что приходит в пропсах. в нашем случае это коллбек
+//используем хук useCallback который запоминает функцию - если приходит одна и та же не запускает перерисовку
+//идем в то место, где эта функция находится и оборачиваем в useCallback
+//массив зависимостей в useCallback зависит от пропсов иил dispatch
 export const AddItemForm = React.memo ((props: AddItemFormPropsType) =>  {
     console.log('Add Item form component')
 
@@ -23,6 +28,7 @@ export const AddItemForm = React.memo ((props: AddItemFormPropsType) =>  {
         setTitle(e.currentTarget.value)
     }
 
+    //избегаем перерисовок начало 11 урока
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if(error !== null) {
             setError(null)

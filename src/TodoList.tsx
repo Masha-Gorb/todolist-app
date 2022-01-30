@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useCallback} from 'react';
 import {FilterValuesType} from './App';
 import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from './EditableSpan';
@@ -23,18 +23,21 @@ type PropsType = {
     changeTaskTitle: (taskId: string, newTitle: string, todolistId: string) => void
 }
 
-export function Todolist(props: PropsType) {
-    const addTask = (title: string) => {
+//замеморизируем тудулист. но это не поможет без использования useCallback на коллбеках
+export const Todolist = React.memo((props: PropsType) => {
+    //useCallback в параметрах - ф-ция которую надо запомнить и массив зависимостей - когда эту функцию запоминать не надо
+
+    const addTask = useCallback((title: string) => {
         props.addTask(title, props.id);
-    }
+    }, [props.addTask, props.id])
 
     const removeTodolist = () => {
         props.removeTodolist(props.id);
     }
-    const changeTodolistTitle = (title: string) => {
+    const changeTodolistTitle = useCallback((title: string) => {
         props.changeTodolistTitle(props.id, title);
-    }
-
+    }, [props.changeTodolistTitle, props.id])
+//эти коллбеки уходят в кнопки
     const onAllClickHandler = () => props.changeFilter("all", props.id);
     const onActiveClickHandler = () => props.changeFilter("active", props.id);
     const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
@@ -77,6 +80,8 @@ export function Todolist(props: PropsType) {
             </button>
         </div>
     </div>
-}
+})
+
+
 
 

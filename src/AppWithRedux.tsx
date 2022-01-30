@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React, {useCallback, useReducer, useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
@@ -65,7 +65,7 @@ function AppWithRedux() {
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
     const dispatch = useDispatch();
 
-    function removeTask(id: string, todolistId: string) {
+    const removeTask = useCallback((id: string, todolistId: string) =>  {
         // //достанем нужный массив по todolistId:
         // let todolistTasks = tasks[todolistId];
         // // перезапишем в этом объекте массив для нужного тудулиста отфилтрованным массивом:
@@ -73,9 +73,9 @@ function AppWithRedux() {
         // // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
         // setTasks({...tasks});
         dispatch(removeTaskAC(id, todolistId))
-    }
+    }, [dispatch])
 
-    function addTask(title: string, todolistId: string) {
+    const addTask = useCallback((title: string, todolistId: string) => {
         // let task = {id: v1(), title: title, isDone: false};
         // //достанем нужный массив по todolistId:
         // let todolistTasks = tasks[todolistId];
@@ -84,7 +84,7 @@ function AppWithRedux() {
         // // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
         // setTasks({...tasks});
         dispatch(addTaskAC(title, todolistId))
-    }
+    }, [dispatch])
 
     function changeFilter(value: FilterValuesType, todolistId: string) {
         // let todolist = todolists.find(tl => tl.id === todolistId);
@@ -94,7 +94,7 @@ function AppWithRedux() {
         // }
     }
 
-    function changeStatus(id: string, isDone: boolean, todolistId: string) {
+    const changeStatus = useCallback((id: string, isDone: boolean, todolistId: string) =>  {
         // //достанем нужный массив по todolistId:
         // let todolistTasks = tasks[todolistId];
         // // найдём нужную таску:
@@ -106,9 +106,9 @@ function AppWithRedux() {
         //     setTasks({...tasks});
         // }
         dispatch(changeTaskStatusAC(id, isDone, todolistId))
-    }
+    }, [dispatch])
 
-    function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
+    const changeTaskTitle = useCallback((id: string, newTitle: string, todolistId: string) =>  {
         // //достанем нужный массив по todolistId:
         // let todolistTasks = tasks[todolistId];
         // // найдём нужную таску:
@@ -120,9 +120,9 @@ function AppWithRedux() {
         //     setTasks({...tasks});
         // }
         dispatch(changeTaskTitleAC(id, newTitle, todolistId))
-    }
+    }, [dispatch])
 
-    function removeTodolist(id: string) {
+    const removeTodolist = useCallback((id: string) =>  {
         // // засунем в стейт список тудулистов, id которых не равны тому, который нужно выкинуть
         // setTodolists(todolists.filter(tl => tl.id != id));
         // // удалим таски для этого тудулиста из второго стейта, где мы храним отдельно таски
@@ -130,9 +130,9 @@ function AppWithRedux() {
         // // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
         // setTasks({...tasks});
         dispatch(removeTodolistAC(id))
-    }
+    }, [dispatch])
 
-    function changeTodolistTitle(id: string, title: string) {
+    const changeTodolistTitle = useCallback((id: string, title: string) =>  {
         // // найдём нужный todolist
         // const todolist = todolists.find(tl => tl.id === id);
         // if (todolist) {
@@ -141,10 +141,10 @@ function AppWithRedux() {
         //     setTodolists([...todolists]);
         // }
         dispatch(changeTodolistTitleAC(id, title))
-    }
+    }, [dispatch])
 
-
-    function addTodolist(title: string) {
+//оборачиваем в useCallback чтобы не отрисовывалась заново форма при добавлении таски
+    const addTodolist = useCallback((title: string) => {
         // let newTodolistId = v1();
         // let newTodolist: TodolistType = {id: newTodolistId, title: title, filter: 'all'};
         // setTodolists([newTodolist, ...todolists]);
@@ -153,7 +153,7 @@ function AppWithRedux() {
         //     [newTodolistId]: []
         // })
         dispatch(addTodolistAC(title))
-    }
+    }, [dispatch])
 
     return (
         <div className="App">
