@@ -8,13 +8,13 @@ export default {
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
+
         axios.get('https://social-network.samuraijs.com/api/1.1/todo-lists', {
             withCredentials: true
         })
             .then((res) => {
                 setState(res.data);
             })
-
         // здесь мы будем делать запрос и ответ закидывать в стейт.
         // который в виде строки будем отображать в div-ке
 
@@ -25,6 +25,16 @@ export const GetTodolists = () => {
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
+        const settings = {
+            withCredentials: true,
+            headers: {
+                'API-KEY': 'ae6348c7-7f60-4884-bd61-0c5af5bc82ae'
+            }
+        }
+        axios.post('https://social-network.samuraijs.com/api/1.1/todo-lists', {title: "newTodolist"}, settings).then( (res) => {
+            setState(res.data);
+        } )
+        
     }, [])
 
     return <div> {JSON.stringify(state)}</div>
