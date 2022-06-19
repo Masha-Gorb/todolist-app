@@ -1,0 +1,18 @@
+.greetingPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: #699efc;
+    background-size: 100%;
+    height: 1170px;
+    min-width: 1366px;
+}
+.h1Text {
+    color: #102E07;
+}
+
+.img {
+    margin-top: 10%;
+    width: 200px;
+}
