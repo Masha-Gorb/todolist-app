@@ -1,0 +1,28 @@
+.App {
+  padding: 30px;
+  display: flex;
+  background-color: #699efc;
+  justify-content: center;
+  height: 1170px;
+  min-width: 1366px;
+}
+
+.App > div {
+  margin-right: 50px;
+}
+
+.error {
+  border: #F9B8FF 1px solid;
+}
+
+.error-message {
+  color: #F9B8FF;
+}
+
+.active-filter {
+  background-color: #8EB744;
+}
+
+.is-done {
+  opacity: 0.5;
+}

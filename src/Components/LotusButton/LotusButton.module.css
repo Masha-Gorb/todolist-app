@@ -1,0 +1,12 @@
+.LotusButton {
+    border: transparent;
+    background-color: transparent;
+}
+
+.lotusButtonLogo {
+    width: 100px;
+    position: relative;
+}
+
+.LotusButtonName {
+}
