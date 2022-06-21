@@ -13,9 +13,7 @@ export const GreetingPage = () => {
           This is a simple planner, where you can write your todos!
         </span>
       </div>
-      <LotusButton
-        buttonName='Lets GO'
-      />
+      <LotusButton/>
     </div>
   )
 }
