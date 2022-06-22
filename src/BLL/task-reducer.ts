@@ -18,9 +18,10 @@ export type changeTaskStatusActionType = {
   isDone: boolean,
   todolistId: string
 }
+const initialState: TasksStateType = {}
 export type TaskActionType = removeTaskActionType | addTaskActionType | changeTaskStatusActionType | AddTodolistActionType | RemoveTodolistActionType
 //state = {[]:[]}
-export const tasksReducer = (state: TasksStateType, action: TaskActionType) => {
+export const tasksReducer = (state: TasksStateType = initialState, action: TaskActionType) => {
   switch (action.type) {
     case 'REMOVE-TASK' : {
       let newState = state[action.todolistId];
