@@ -6,6 +6,7 @@ import {addTodolistAC, changeTodolistFilterAC, removeTodolistAC} from "../../BLL
 import {addTaskAC, changeTaskStatusAC, removeTaskAC} from "../../BLL/task-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {MainPageRootStateType} from "../../BLL/store";
+import {CreateTodolist, GetTodolists} from "../../api/todolist-api";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = {
@@ -86,6 +87,8 @@ function MainPage() {
                     />
                 })
             }
+            <GetTodolists/>
+            <CreateTodolist/>
 
         </div>
     );

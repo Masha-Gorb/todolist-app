@@ -4,6 +4,7 @@ import {GreetingPage} from "./components/GreetingPage/GreetingPage";
 import {LoginPage} from "./components/LoginPage/LoginPage";
 import {Route, Routes} from "react-router-dom";
 import MainPage from "./components/MainPage/MainPage";
+import {TimerPage} from "./components/TimerPage/TimerPage";
 
 export const App = () => {
   return (
@@ -20,6 +21,10 @@ export const App = () => {
             </Route>
             <Route path="/main" element={
               <MainPage/>
+            }>
+            </Route>
+            <Route path="/timer" element={
+              <TimerPage/>
             }>
             </Route>
 
