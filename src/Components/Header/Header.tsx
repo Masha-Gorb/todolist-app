@@ -14,7 +14,8 @@ export const Header = () => {
       <div>
         <Link className={s.headerText} to="/greetings">--Start Page--</Link>
         <Link className={s.headerText} to="/login">Login Page--</Link>
-        <Link className={s.headerText} to="/main">Main Page</Link>
+        <Link className={s.headerText} to="/main">Main Page---</Link>
+        <Link className={s.headerText} to="/timer">Timer Page</Link>
       </div>
 
     </div>

@@ -1,5 +1,13 @@
 .timerPageContainer {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    background-color: #699efc;
+    height: 1170px;
+    min-width: 1366px;
+}
+
+.sleepFroggy {
+    height: 200px;
+
 }
