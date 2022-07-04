@@ -2,13 +2,17 @@ import React, {useEffect, useState} from 'react'
 import s from './TimerPage.module.css'
 import froggyT3 from "../../asserts/froggyGIFs/froggyT3.gif";
 import sleepFroggy from "../../asserts/froggyGIFs/sleepFroggy.gif";
+import useSound from 'use-sound';
+import SingleFroggySing from '../../asserts/froggySOUNDS/SingleFroggySing.mp3';
+
 
 
 export const TimerPage = () => {
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [isActive, setIsActive] = useState(false);
-
+  const [play] = useSound(SingleFroggySing);
+  
   function toggle() {
     setIsActive(!isActive);
   }
@@ -25,22 +29,30 @@ export const TimerPage = () => {
       interval = setInterval(() => {
         setSeconds(seconds => seconds + 1);
       }, 1000);
-      if (seconds === 61) {
+      if (seconds === 61 && minutes === 10) {
         setSeconds(0)
+        clearInterval(interval)
+        setIsActive(false)
       }
     } else if (!isActive && seconds !== 0) {
       // @ts-ignore
       clearInterval(interval);
     }
     return () => clearInterval(interval as NodeJS.Timeout);
-  }, [isActive, seconds]);
+  }, [isActive, seconds, minutes]);
 
   useEffect(() => {
     let intervalMinutes: number | NodeJS.Timeout | null | undefined = null;
     if (isActive) {
       intervalMinutes = setInterval(() => {
         setMinutes(minutes => minutes + 1);
-      }, 10000);
+      }, 60000);
+      if (minutes === 10) {
+        setSeconds(0);
+        setMinutes(0);
+        clearInterval(intervalMinutes)
+        setIsActive(false)
+      }
     } else if (!isActive && minutes !== 0) {
       // @ts-ignore
       clearInterval(intervalMinutes);
@@ -51,23 +63,24 @@ export const TimerPage = () => {
   return (
     <div className={s.timerPageContainer}>
       {isActive ? <div>
-        <img alt='' className={s.img} src={froggyT3}/>
+        <img alt='' src={froggyT3}/>
       </div> : <div>
         <img alt='' className={s.sleepFroggy} src={sleepFroggy}/>
       </div>}
 
-      <div className="time">
-        {minutes}m
+      <div className={s.display}>
+        {minutes}m:
         {seconds}s
       </div>
       <div>
-        <button className={`button button-primary button-primary-${isActive ? 'active' : 'inactive'}`} onClick={toggle}>
+        <button className={s.button} onClick={toggle}>
           {isActive ? 'Pause' : 'Start'}
         </button>
-        <button onClick={reset}>
+        <button className={s.button} onClick={reset}>
           Reset
         </button>
       </div>
+      <button onClick={() => play()}>+</button>
     </div>
   );
 };

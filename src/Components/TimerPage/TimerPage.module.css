@@ -11,3 +11,24 @@
     height: 200px;
 
 }
+
+.display {
+    width: 200px;
+    height: 100px;
+    background-color: #F2F2F2;
+    font-size: 30px;
+    text-align: center;
+    border-radius: 30px;
+    margin-top: 10px;
+    color: #102E07;
+}
+
+.button {
+    width: 100px;
+    height: 30px;
+    background-color: #F9B8FF;
+    border: #F9B8FF 1px solid;
+    border-radius: 10px;
+    margin-right: 5px;
+    margin-top: 10px;
+}
