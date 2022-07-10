@@ -1,5 +1,7 @@
 import {FilterValuesType, TodolistType} from "../components/MainPage/MainPage";
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {TodolistApiUI} from "../api/todolist-api-";
 
 export type RemoveTodolistActionType = {
   type: 'REMOVE-TODOLIST'
@@ -15,15 +17,31 @@ export type ChangeTodolistFilterType = {
   id: string
   filter: FilterValuesType
 }
-const initialState: Array<TodolistType> = []
+export type SetTodolistsActionType = {
+  type: 'SET-TODOLISTS'
+  todolists: Array<TodolistType>
+}
+export type setTodolistsACType = ReturnType<typeof setTodolistsAC>
 
-export type TodolistActionType = RemoveTodolistActionType | AddTodolistActionType | ChangeTodolistFilterType;
+const initialState: Array<TodolistDomainType> = []
+export type TodolistDomainType = TodolistType & {
+  filter: FilterValuesType
+}
 
-// меня вызовут и дадут мне стейт (почти всегда объект)
-// и инструкцию (action, тоже объект)
-// согласно прописаному type в этом action (инструкции) я поменяю state
-export const todolistsReducer = (state: Array<TodolistType> = initialState, action: TodolistActionType): Array<TodolistType> => {
+export type TodolistActionType = RemoveTodolistActionType
+  | AddTodolistActionType
+  | ChangeTodolistFilterType
+  | setTodolistsACType;
+
+export const todolistsReducer = (state: Array<TodolistDomainType> = initialState, action: TodolistActionType): Array<TodolistDomainType> => {
   switch (action.type) {
+    case 'SET-TODOLISTS': {
+      return action.todolists.map(tl => ({
+        ...tl,
+        filter: 'all'
+      }))
+    }
+
     case 'REMOVE-TODOLIST': {
       return state.filter(tl => tl.id !== action.id);
     }
@@ -62,4 +80,21 @@ export const changeTodolistFilterAC = (id: string, filter: FilterValuesType) => 
     id,
     filter
   } as const
+}
+
+export const setTodolistsAC = (todolists: TodolistDomainType[]) => {
+  return {type: 'SET-TODOLISTS',
+    todolists} as const
+}
+
+//thunk - функция, принимает диспатч из редакса
+// принимает getState - ф-ция, кот возвращает state всего приложения
+// ничего не возвращает
+//предназначение: сайдЭффекты
+export const fetchTodolistsThunk = (dispatch: Dispatch) => {
+    TodolistApiUI.getTodos()
+      .then((res) => {
+        let todos = res.data
+        dispatch(setTodolistsAC(todos))
+      })
 }

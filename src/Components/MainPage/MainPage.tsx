@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './MainPage.css';
 import {TaskType, Todolist} from '../Todolist/Todolist';
 import {AddItemForm} from "../SmallComponents/AddItemForm";
-import {addTodolistAC, changeTodolistFilterAC, removeTodolistAC} from "../../BLL/todolist-reducer";
+import {
+    addTodolistAC,
+    changeTodolistFilterAC,
+    fetchTodolistsThunk,
+    removeTodolistAC,
+} from "../../BLL/todolist-reducer";
 import {addTaskAC, changeTaskStatusAC, removeTaskAC} from "../../BLL/task-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {MainPageRootStateType} from "../../BLL/store";
-import {CreateTodolist, GetTodolists} from "../../api/todolist-api";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = {
@@ -21,6 +25,10 @@ export type TasksStateType = {
 
 
 function MainPage() {
+
+    useEffect(() => {
+        dispatch(fetchTodolistsThunk)
+    })
 
     const todolists = useSelector<MainPageRootStateType, Array<TodolistType>>(state => state.todolists)
     const tasks = useSelector<MainPageRootStateType, TasksStateType>(state => state.tasks)
@@ -87,8 +95,6 @@ function MainPage() {
                     />
                 })
             }
-            <GetTodolists/>
-            <CreateTodolist/>
 
         </div>
     );

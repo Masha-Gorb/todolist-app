@@ -5,14 +5,12 @@ import sleepFroggy from "../../asserts/froggyGIFs/sleepFroggy.gif";
 import useSound from 'use-sound';
 import SingleFroggySing from '../../asserts/froggySOUNDS/SingleFroggySing.mp3';
 
-
-
 export const TimerPage = () => {
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [play] = useSound(SingleFroggySing);
-  
+
   function toggle() {
     setIsActive(!isActive);
   }
@@ -80,7 +78,7 @@ export const TimerPage = () => {
           Reset
         </button>
       </div>
-      <button onClick={() => play()}>+</button>
+      <button onClick={() => play()}>КВА</button>
     </div>
   );
 };
