@@ -4,10 +4,9 @@ import {TaskType, Todolist} from '../Todolist/Todolist';
 import {AddItemForm} from "../SmallComponents/AddItemForm";
 import {
     addTodolistAC,
-    changeTodolistFilterAC, fetchTodolistsTC,
-    removeTodolistAC,
+    changeTodolistFilterAC, fetchTodolistsTC, removeTodolistTC,
 } from "../../BLL/todolist-reducer";
-import { addTaskTC, changeTaskStatusAC, removeTaskTC} from "../../BLL/task-reducer";
+import {addTaskTC, changeTaskStatusTC, removeTaskTC} from "../../BLL/task-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {MainPageRootStateType} from "../../BLL/store";
 
@@ -21,7 +20,6 @@ export type TodolistType = {
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
-
 
 function MainPage() {
 
@@ -48,10 +46,9 @@ function MainPage() {
         dispatch(thunk)
     }
 
-
     function changeStatus(id: string, isDone: boolean, todolistId: string) {
-        const action = changeTaskStatusAC(id, isDone, todolistId)
-        dispatch(action)
+        dispatch(changeTaskStatusTC(todolistId, id, isDone))
+
     }
 
     function changeFilter(value: FilterValuesType, todolistId: string) {
@@ -60,8 +57,8 @@ function MainPage() {
     }
 
     function removeTodolist(id: string) {
-        const action = removeTodolistAC(id)
-        dispatch(action)
+        const thunk = removeTodolistTC(id)
+        dispatch(thunk)
     }
 
     return (

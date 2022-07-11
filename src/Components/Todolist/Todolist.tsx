@@ -1,14 +1,13 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useEffect} from 'react';
 import {FilterValuesType} from '../MainPage/MainPage';
 import {AddItemForm} from "../SmallComponents/AddItemForm";
 import {EditableSpan} from "../SmallComponents/EditableSpan";
+import {fetchTasksTC} from "../../BLL/task-reducer";
+import {useDispatch} from "react-redux";
+import {TaskTypeRes} from "../../api/todolist-api-";
 
 
-export type TaskType = {
-    id: string
-    title: string
-    isDone: boolean
-}
+export type TaskType = TaskTypeRes
 
 type PropsType = {
     id: string
@@ -23,9 +22,15 @@ type PropsType = {
 }
 
 export function Todolist(props: PropsType) {
+
+    const dispatch = useDispatch()
+    useEffect( () => {
+        dispatch(fetchTasksTC(props.id))
+    }, [dispatch, props.id])
+
+
     const addTask = (title: string) => {
-        props.addTask(title, props.id)
-    }
+        props.addTask(title, props.id)}
 
     const removeTodolist = () => props.removeTodolist(props.id)
 
