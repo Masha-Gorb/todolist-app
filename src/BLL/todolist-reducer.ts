@@ -99,6 +99,13 @@ export const fetchTodolistsTC = () => {
   }
 }
 
+export const addTodolistTC = (title: string) => (dispatch: Dispatch) => {
+  return TodolistApiUI.createTodos(title)
+    .then(res => {
+    dispatch(addTodolistAC(title))
+  })
+}
+
 export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch) => {
   return TodolistApiUI.deleteTodos(todolistId)
     .then(res => {
