@@ -46,17 +46,13 @@ export type UpdateTodolistTitleType = {
 }
 
 export const TodolistTasksApi = {
-  getTasks: () => {
-    const todolistId = 'c94389a3-7f9d-467f-a6f8-71542ec12ec9';
+  getTasks: (todolistId: string) => {
     return instance.get(`todo-lists/${todolistId}/tasks`)
   },
-  createTask: () => {
-    const todolistId = 'c94389a3-7f9d-467f-a6f8-71542ec12ec9'
-    return instance.post(`todo-lists/${todolistId}/tasks`, {title: "SUPER NEW TASK FOR THIS TODO"})
+  createTask: (title: string, todolistId: string) => {
+    return instance.post(`todo-lists/${todolistId}/tasks`, {title: title})
   },
-  deleteTask: () => {
-    const todolistId = 'c94389a3-7f9d-467f-a6f8-71542ec12ec9'
-    const taskId = '3681f214-9ca3-487b-bbe2-925bc6fb10a8'
-    return instance.post(`todo-lists/${todolistId}/tasks/${taskId}`)
+  deleteTask: (todolistId: string, taskId: string) => {
+    return instance.delete(`todo-lists/${todolistId}/tasks/${taskId}`)
   }
 }

@@ -1,14 +1,13 @@
-import React, {useEffect} from 'react';
+import React, { useEffect} from 'react';
 import './MainPage.css';
 import {TaskType, Todolist} from '../Todolist/Todolist';
 import {AddItemForm} from "../SmallComponents/AddItemForm";
 import {
     addTodolistAC,
-    changeTodolistFilterAC,
-    fetchTodolistsThunk,
+    changeTodolistFilterAC, fetchTodolistsTC,
     removeTodolistAC,
 } from "../../BLL/todolist-reducer";
-import {addTaskAC, changeTaskStatusAC, removeTaskAC} from "../../BLL/task-reducer";
+import { addTaskTC, changeTaskStatusAC, removeTaskTC} from "../../BLL/task-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {MainPageRootStateType} from "../../BLL/store";
 
@@ -26,28 +25,29 @@ export type TasksStateType = {
 
 function MainPage() {
 
-    useEffect(() => {
-        dispatch(fetchTodolistsThunk)
-    })
-
     const todolists = useSelector<MainPageRootStateType, Array<TodolistType>>(state => state.todolists)
     const tasks = useSelector<MainPageRootStateType, TasksStateType>(state => state.tasks)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchTodolistsTC())
+    }, [dispatch])
 
     function addTodolist(title: string) {
         const action = addTodolistAC(title)
         dispatch(action)
     }
 
-    function removeTask(id: string, todolistId: string) {
-        const action = removeTaskAC(id, todolistId)
-        dispatch(action)
+    function removeTask (id: string, todolistId: string) {
+        const thunk = removeTaskTC(id, todolistId)
+        dispatch(thunk)
     }
 
     function addTask(title: string, todolistId: string) {
-        const action = addTaskAC(title, todolistId)
-        dispatch(action)
+        const thunk = addTaskTC(title, todolistId)
+        dispatch(thunk)
     }
+
 
     function changeStatus(id: string, isDone: boolean, todolistId: string) {
         const action = changeTaskStatusAC(id, isDone, todolistId)

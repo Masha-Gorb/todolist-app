@@ -63,7 +63,7 @@ export const todolistsReducer = (state: Array<TodolistDomainType> = initialState
 }
 
 export const removeTodolistAC = (todolistId: string): RemoveTodolistActionType => {
-  return { type: 'REMOVE-TODOLIST', id: todolistId}
+  return {type: 'REMOVE-TODOLIST', id: todolistId}
 }
 
 export const addTodolistAC = (title: string): AddTodolistActionType => {
@@ -76,25 +76,25 @@ export const addTodolistAC = (title: string): AddTodolistActionType => {
 
 export const changeTodolistFilterAC = (id: string, filter: FilterValuesType) => {
   return {
-    type:'CHANGE-TODOLIST-FILTER',
+    type: 'CHANGE-TODOLIST-FILTER',
     id,
     filter
   } as const
 }
 
 export const setTodolistsAC = (todolists: TodolistDomainType[]) => {
-  return {type: 'SET-TODOLISTS',
-    todolists} as const
+  return {
+    type: 'SET-TODOLISTS',
+    todolists
+  } as const
 }
 
-//thunk - функция, принимает диспатч из редакса
-// принимает getState - ф-ция, кот возвращает state всего приложения
-// ничего не возвращает
-//предназначение: сайдЭффекты
-export const fetchTodolistsThunk = (dispatch: Dispatch) => {
+export const fetchTodolistsTC = () => {
+  return (dispatch: Dispatch) => {
     TodolistApiUI.getTodos()
       .then((res) => {
         let todos = res.data
         dispatch(setTodolistsAC(todos))
       })
+  }
 }
