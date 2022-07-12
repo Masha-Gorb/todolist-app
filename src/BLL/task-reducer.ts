@@ -4,6 +4,7 @@ import {Dispatch} from "redux";
 import {TaskTypeRes, TodolistTasksApi} from "../api/todolist-api-";
 import {TaskType} from "../components/Todolist/Todolist";
 import {MainPageRootStateType} from "./store";
+import {setMainStatusAC} from "./main-reducer";
 
 export type removeTaskActionType = {
   type: 'REMOVE-TASK'
@@ -118,30 +119,40 @@ export const fetchTasksAC = (tasks: Array<TaskType>, todolistId: string) => {
 
 export const fetchTasksTC = (todolistId: string) => {
   return (dispatch: Dispatch) => {
+    dispatch(setMainStatusAC('loading'))
     TodolistTasksApi.getTasks(todolistId)
       .then((res) => {
         const tasks = res.data.items
         const action = fetchTasksAC(tasks, todolistId)
         dispatch(action)
+        dispatch(setMainStatusAC('succeeded'))
+
       })
   }
 }
 
 export const removeTaskTC = (id: string, todolistId: string) => (dispatch: Dispatch) => {
+  dispatch(setMainStatusAC('loading'))
   return TodolistTasksApi.deleteTask(todolistId, id)
     .then(res => {
       dispatch(removeTaskAC(id, todolistId))
+      dispatch(setMainStatusAC('succeeded'))
+
     })
 }
 
 export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispatch) => {
+  dispatch(setMainStatusAC('loading'))
   return TodolistTasksApi.createTask(title, todolistId)
     .then((res) => {
       dispatch(addTaskAC(res.data.data.item))
+      dispatch(setMainStatusAC('succeeded'))
+
     })
 }
 export const changeTaskStatusTC = (todolistId: string, taskId: string, isDone: boolean) =>
   (dispatch: Dispatch, getState: () => MainPageRootStateType) => {
+    dispatch(setMainStatusAC('loading'))
     const allTasksFromState = getState().tasks;
     const tasksForCurrentTodolist = allTasksFromState[todolistId]
     const task = tasksForCurrentTodolist.find(t => {
@@ -159,6 +170,8 @@ export const changeTaskStatusTC = (todolistId: string, taskId: string, isDone: b
       })
         .then(() => {
           dispatch(changeTaskStatusAC(taskId, isDone, todolistId))
+          dispatch(setMainStatusAC('succeeded'))
+
         })
     }
   }

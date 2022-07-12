@@ -9,8 +9,9 @@ import {
 import {addTaskTC, changeTaskStatusTC, removeTaskTC} from "../../BLL/task-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {MainPageRootStateType} from "../../BLL/store";
-import {LoadingFroggy} from "../SmallComponents/LoadingFroggy";
 import {RequestStatusType} from "../../BLL/main-reducer";
+import CircularProgress from '@mui/material/CircularProgress/CircularProgress';
+import {ErrorSnackbar} from "../SmallComponents/Snackbar/ErrorSnackbar";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = {
@@ -66,10 +67,9 @@ function MainPage() {
 
     return (
         <div className="App">
-
+            {status === 'loading' && <CircularProgress color="success" />}
             <AddItemForm addItem={addTodolist}/>
-
-            {status === 'loading' && <LoadingFroggy/>}
+            <ErrorSnackbar/>
 
             {
                 todolists.map(tl => {

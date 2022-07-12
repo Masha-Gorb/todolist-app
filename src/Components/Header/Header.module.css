@@ -11,7 +11,19 @@
     width: 40px;
 }
 
-.headerText {
+.headerLogoText {
     color: #F2F2F2;
+}
+.headerText {
+    color: #102E07;
+    font-size: 18px;
+}
+
+.button {
+    margin-top: 25px;
+    margin-left: 5px;
+    background-color: aliceblue;
+    border: transparent;
+    border-radius: 10px;
 }
 

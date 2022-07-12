@@ -1,5 +1,5 @@
 import React from 'react'
-import froggyT2 from "../../asserts/froggyGIFs/froggyT2.gif";
+import froggyT2 from "../../asserts/froggyGIFs/loading.gif";
 
 export const LoadingFroggy = () => {
   return (
