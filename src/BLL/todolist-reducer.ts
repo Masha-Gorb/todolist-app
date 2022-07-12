@@ -2,6 +2,7 @@ import {FilterValuesType, TodolistType} from "../components/MainPage/MainPage";
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {TodolistApiUI} from "../api/todolist-api-";
+import {setMainStatusAC} from "./main-reducer";
 
 export type RemoveTodolistActionType = {
   type: 'REMOVE-TODOLIST'
@@ -91,24 +92,32 @@ export const setTodolistsAC = (todolists: TodolistDomainType[]) => {
 
 export const fetchTodolistsTC = () => {
   return (dispatch: Dispatch) => {
+    dispatch(setMainStatusAC('loading'))
     TodolistApiUI.getTodos()
       .then((res) => {
         let todos = res.data
         dispatch(setTodolistsAC(todos))
+        dispatch(setMainStatusAC('succeeded'))
       })
   }
 }
 
 export const addTodolistTC = (title: string) => (dispatch: Dispatch) => {
+  dispatch(setMainStatusAC('loading'))
   return TodolistApiUI.createTodos(title)
     .then(res => {
     dispatch(addTodolistAC(title))
-  })
+      dispatch(setMainStatusAC('succeeded'))
+
+    })
 }
 
 export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch) => {
+  dispatch(setMainStatusAC('loading'))
   return TodolistApiUI.deleteTodos(todolistId)
     .then(res => {
     dispatch(removeTodolistAC(todolistId))
-  })
+      dispatch(setMainStatusAC('succeeded'))
+
+    })
 }

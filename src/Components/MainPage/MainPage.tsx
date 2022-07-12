@@ -3,12 +3,14 @@ import './MainPage.css';
 import {TaskType, Todolist} from '../Todolist/Todolist';
 import {AddItemForm} from "../SmallComponents/AddItemForm";
 import {
-    addTodolistAC,
+    addTodolistTC,
     changeTodolistFilterAC, fetchTodolistsTC, removeTodolistTC,
 } from "../../BLL/todolist-reducer";
 import {addTaskTC, changeTaskStatusTC, removeTaskTC} from "../../BLL/task-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {MainPageRootStateType} from "../../BLL/store";
+import {LoadingFroggy} from "../SmallComponents/LoadingFroggy";
+import {RequestStatusType} from "../../BLL/main-reducer";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = {
@@ -27,13 +29,14 @@ function MainPage() {
     const tasks = useSelector<MainPageRootStateType, TasksStateType>(state => state.tasks)
     const dispatch = useDispatch()
 
+    const status = useSelector<MainPageRootStateType, RequestStatusType>(state => state.main.status )
+
     useEffect(() => {
         dispatch(fetchTodolistsTC())
     }, [dispatch])
 
     function addTodolist(title: string) {
-        const action = addTodolistAC(title)
-        dispatch(action)
+        dispatch(addTodolistTC(title))
     }
 
     function removeTask (id: string, todolistId: string) {
@@ -65,6 +68,8 @@ function MainPage() {
         <div className="App">
 
             <AddItemForm addItem={addTodolist}/>
+
+            {status === 'loading' && <LoadingFroggy/>}
 
             {
                 todolists.map(tl => {
