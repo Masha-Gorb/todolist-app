@@ -22,14 +22,18 @@ export const mainReducer = (state: InitialStateType = initialState, action: Acti
 export const setMainErrorAC = (error: string | null) => {
   return {
     type: 'APP/SET-ERROR',
-    error,
-  }
+    error: error,
+  } as const
 }
 
 export const setMainStatusAC = (status: RequestStatusType) => {
   return {
     type: 'APP/SET-STATUS',
-    status
-  }
+    status: status,
+  } as const
 }
-type ActionsType = any
+
+export type setMainStatusACType = ReturnType<typeof setMainStatusAC>
+export type setMainErrorACType = ReturnType<typeof setMainErrorAC>
+
+type ActionsType = setMainStatusACType | setMainErrorACType

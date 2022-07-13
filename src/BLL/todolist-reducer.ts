@@ -48,7 +48,7 @@ export const todolistsReducer = (state: Array<TodolistDomainType> = initialState
     }
     case 'ADD-TODOLIST': {
       let newTodolist: TodolistType = {id: action.todolistId, title: action.title, filter: 'all'}
-      return [...state, newTodolist];
+      return [newTodolist, ...state];
     }
     case 'CHANGE-TODOLIST-FILTER': {
       let todolist = state.find(tl => tl.id === action.id);
@@ -108,12 +108,12 @@ export const addTodolistTC = (title: string) => (dispatch: Dispatch) => {
     .then((res) => {
       if (res.data.resultCode === 0) {
         dispatch(addTodolistAC(title))
+        dispatch(setMainErrorAC(null))
         dispatch(setMainStatusAC('succeeded'))
       } else {
         // @ts-ignore
-        dispatch(setMainErrorAC('j'))
+        dispatch(setMainErrorAC(res.data.messages[0]))
         dispatch(setMainStatusAC('failed'))
-
       }
 
 
