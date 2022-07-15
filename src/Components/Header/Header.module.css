@@ -11,12 +11,19 @@
     width: 40px;
 }
 
+.headerLinkGroup {
+    display: flex;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 500px;
+}
+
 .headerLogoText {
     color: #F2F2F2;
 }
 .headerText {
-    color: #102E07;
-    font-size: 18px;
+    color: #F2F2F2;
+    font-size: 14px;
 }
 
 .button {
