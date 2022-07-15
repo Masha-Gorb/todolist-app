@@ -14,7 +14,6 @@ export const LoginPage = () => {
       <input/>
       <span>enter your password</span>
       <button onClick={toMainPage}>Submit</button>
-
     </div>
   )
 }
