@@ -9,9 +9,8 @@ import {
 import {addTaskTC, changeTaskStatusTC, removeTaskTC} from "../../BLL/task-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {MainPageRootStateType} from "../../BLL/store";
-import {RequestStatusType} from "../../BLL/main-reducer";
-import CircularProgress from '@mui/material/CircularProgress/CircularProgress';
 import {ErrorSnackbar} from "../SmallComponents/Snackbar/ErrorSnackbar";
+import {Paper} from "@mui/material";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = {
@@ -30,7 +29,7 @@ function MainPage() {
     const tasks = useSelector<MainPageRootStateType, TasksStateType>(state => state.tasks)
     const dispatch = useDispatch()
 
-    const status = useSelector<MainPageRootStateType, RequestStatusType>(state => state.main.status )
+    // const status = useSelector<MainPageRootStateType, RequestStatusType>(state => state.main.status )
 
     useEffect(() => {
         dispatch(fetchTodolistsTC())
@@ -65,10 +64,15 @@ function MainPage() {
         dispatch(thunk)
     }
 
+    const divStyle = {
+        height: 60,
+    }
     return (
         <div className="App">
-            {status === 'loading' && <CircularProgress color="success" />}
-            <AddItemForm addItem={addTodolist}/>
+
+            <Paper elevation={3} style={divStyle}>
+                <AddItemForm addItem={addTodolist}/>
+            </Paper>
             <ErrorSnackbar/>
 
             {

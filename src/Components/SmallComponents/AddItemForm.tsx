@@ -1,4 +1,7 @@
+import TextField from '@mui/material/TextField/TextField';
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import s from './../Todolist/Todolist.module.css'
+
 
 type PropsType = {
   addItem: (title: string) => void
@@ -30,13 +33,18 @@ export const AddItemForm = (props: PropsType) => {
   }
   return (
     <div>
-      <input value={title}
-             onChange={onChangeHandler}
-             onKeyPress={onKeyPressHandler}
-             className={error ? "error" : ""}
+      <TextField id="filled-basic" label=" " variant="filled"
+                 defaultValue=" "
+                 size="small"
+                 value={title}
+                 onChange={onChangeHandler}
+                 onKeyPress={onKeyPressHandler}
+                 className={error ? "error" : ""}
       />
-      <button onClick={addTask}>+</button>
+      <button className={s.button} onClick={addTask}>+</button>
       {error && <div className="error-message">{error}</div>}
+
+
     </div>
   )
 }

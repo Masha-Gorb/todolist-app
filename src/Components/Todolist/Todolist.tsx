@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 import {TaskTypeRes} from "../../api/todolist-api-";
 import Checkbox from '@mui/material/Checkbox/Checkbox';
 import s from './Todolist.module.css'
-import {Paper} from "@mui/material";
+import {Button, ButtonGroup, Paper} from "@mui/material";
 
 
 export type TaskType = TaskTypeRes
@@ -42,14 +42,10 @@ export function Todolist(props: PropsType) {
   const onActiveClickHandler = () => props.changeFilter("active", props.id);
   const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
 
-  const divStyle = {
-    display: 'flex',
-  };
-
   return <div>
     <Paper elevation={3} className={s.todolistPaper}>
     <h3> {props.title}
-      <button onClick={removeTodolist}>x</button>
+      <button className={s.button} onClick={removeTodolist}>x</button>
     </h3>
     <div>
       <AddItemForm
@@ -65,25 +61,28 @@ export function Todolist(props: PropsType) {
           }
 
           return <div className={s.taskBlock}>
-              <li style={divStyle} key={t.id} className={t.isDone ? "is-done" : ""}>
+              <div key={t.id} className={t.isDone ? "is-done" : ""}>
                 <Checkbox color="success" onChange={onChangeHandler} checked={t.isDone}/>
                 <EditableSpan title={t.title}/>
                 <button className={s.button} onClick={onClickHandler}>x</button>
-              </li>
+              </div>
           </div>
         })
       }
     </ul>
     <div>
-      <button className={props.filter === 'all' ? "active-filter" : ""}
-              onClick={onAllClickHandler}>All
-      </button>
-      <button className={props.filter === 'active' ? "active-filter" : ""}
-              onClick={onActiveClickHandler}>Active
-      </button>
-      <button className={props.filter === 'completed' ? "active-filter" : ""}
-              onClick={onCompletedClickHandler}>Completed
-      </button>
+      <ButtonGroup color="secondary" aria-label="medium secondary button group">
+        <Button className={props.filter === 'all' ? "active-filter" : ""}
+                         onClick={onAllClickHandler}>All
+      </Button>
+        <Button className={props.filter === 'active' ? "active-filter" : ""}
+                onClick={onActiveClickHandler}>Active
+        </Button>
+        <Button className={props.filter === 'completed' ? "active-filter" : ""}
+                onClick={onCompletedClickHandler}>Completed
+        </Button>
+      </ButtonGroup>
+
     </div>
     </Paper>
   </div>
