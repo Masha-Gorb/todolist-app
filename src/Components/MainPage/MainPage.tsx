@@ -9,7 +9,6 @@ import {
 import {addTaskTC, changeTaskStatusTC, removeTaskTC} from "../../BLL/task-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {MainPageRootStateType} from "../../BLL/store";
-import {ErrorSnackbar} from "../SmallComponents/Snackbar/ErrorSnackbar";
 import {Paper} from "@mui/material";
 
 export type FilterValuesType = "all" | "active" | "completed";
@@ -73,7 +72,7 @@ function MainPage() {
             <Paper elevation={3} style={divStyle}>
                 <AddItemForm addItem={addTodolist}/>
             </Paper>
-            <ErrorSnackbar/>
+
 
             {
                 todolists.map(tl => {

@@ -9,9 +9,10 @@ export const GreetingPage = () => {
       {/*<h1 className={s.h1Text}>Hello there</h1>*/}
       <img alt='' className={s.img} src={froggy1}/>
       <div className={s.greetingText}>
-        <span>Hello!
-          This is a simple planner, where you can write your todos!
-        </span>
+        <span>Привет!</span>
+        <br/>
+        <span>Это незамысловатое приложение для составления тудулистов. </span>
+        <span>Тык на лотос и погнали!</span>
       </div>
       <LotusButton/>
     </div>

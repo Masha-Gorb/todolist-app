@@ -1,7 +1,5 @@
 import React from 'react';
-import {Header} from "./components/Header/Header";
 import {GreetingPage} from "./components/GreetingPage/GreetingPage";
-import {LoginPage} from "./components/LoginPage/LoginPage";
 import {Link, Route, Routes} from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import MainPage from "./components/MainPage/MainPage";
@@ -12,6 +10,8 @@ import {MainPageRootStateType} from "./BLL/store";
 import {RequestStatusType} from "./BLL/main-reducer";
 import s from "./components/Header/Header.module.css";
 import Button from "@mui/material/Button/Button";
+import {Header} from "./components/Header/Header";
+import {TestPage} from "./components/TestPage/TestPage";
 
 export const App = () => {
   const status = useSelector<MainPageRootStateType, RequestStatusType>(state => state.main.status )
@@ -19,7 +19,7 @@ export const App = () => {
   return (
         <div>
           <Header/>
-          {status === 'loading' &&   <LinearProgress color="secondary" />}
+          {status === 'loading' && <LinearProgress color="secondary" />}
           <Routes>
             <Route path="/" element={
               <GreetingPage/>
@@ -29,16 +29,17 @@ export const App = () => {
               <GreetingPage/>
             }>
             </Route>
-            <Route path="/login" element={
-              <LoginPage/>
-            }>
-            </Route>
+
             <Route path="/main" element={
               <MainPage/>
             }>
             </Route>
             <Route path="/timer" element={
               <TimerPage/>
+            }>
+            </Route>
+            <Route path="/testPage" element={
+              <TestPage/>
             }>
             </Route>
             <Route path="/404" element={<div>

@@ -78,7 +78,11 @@ export const TimerPage = () => {
           Reset
         </button>
       </div>
-      <button onClick={() => play()}>КВА</button>
+      <button className={s.button} onClick={() => play()}>КВА</button>
+      <br/>
+        <span>This is a timer, which you cat turn on when you start to do tasks.</span>
+      <br/>
+      <span>It should be kinda Pomidorro stuff, but I still working on it </span>
     </div>
   );
 };

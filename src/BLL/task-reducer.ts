@@ -148,7 +148,6 @@ export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispa
     .then((res) => {
       dispatch(addTaskAC(res.data.data.item))
       dispatch(setMainStatusAC('succeeded'))
-
     })
 }
 export const changeTaskStatusTC = (todolistId: string, taskId: string, isDone: boolean) =>

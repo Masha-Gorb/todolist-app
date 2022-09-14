@@ -50,6 +50,26 @@ export const TodolistTasksApi = {
   },
 }
 
+export const authApi = {
+  login: (data: LoginParamsType) => {
+    return instance.post('/auth/login', data)
+  }
+}
+
+export type LoginParamsType = {
+  email: string,
+  password: string,
+  rememberMe: boolean,
+}
+
+export type LoginResponseType = {
+  resultCode: number,
+  messages: [],
+  data: {
+    userId: number
+  }
+}
+
 export type TodolistApiGetType = {
   id: string,
   title: string,

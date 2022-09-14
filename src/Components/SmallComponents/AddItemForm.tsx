@@ -40,11 +40,15 @@ export const AddItemForm = (props: PropsType) => {
                  onChange={onChangeHandler}
                  onKeyPress={onKeyPressHandler}
                  className={error ? "error" : ""}
+                 sx={{
+                   width: 200,
+                   paddingTop: 1,
+                   borderRadius: 5,
+                   marginLeft: 3,
+                 }}
       />
       <button className={s.button} onClick={addTask}>+</button>
       {error && <div className="error-message">{error}</div>}
-
-
     </div>
   )
 }

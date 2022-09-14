@@ -11,7 +11,7 @@ export const Header = () => {
   return (
     <div className={s.header}>
         <img alt='' className={s.logo} src={FrogLogo}/>
-        <h1 className={s.headerLogoText}>EAT THE FROG</h1>
+        <h1 className={s.headerLogoText}>Froggy Todolist</h1>
         <img alt='' className={s.logo} src={LotusLogo}/>
 
       <div className={s.headerLinkGroup}>
@@ -24,6 +24,9 @@ export const Header = () => {
           </Button>
           <Button>
             <Link className={s.headerText} to="/timer">Timer Page</Link>
+          </Button>
+          <Button>
+            <Link className={s.headerText} to="/testPage">Test Page</Link>
           </Button>
         </ButtonGroup>
       </div>
